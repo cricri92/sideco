@@ -359,17 +359,19 @@ class Request extends MX_Controller{
 		echo json_encode($query);
 	}
 
-	public function getRequestsForDairy()
+	public function getRequestsForDiary()
 	{
-		$query = $this->request_model->getRequestsForDairy();
+		$query = $this->request_model->getRequestsForDiary();
 		$query = objectSQL_to_array($query);
 		foreach ($query as $key => $value) 
 		{
 			$query[$key]['type_request'] = modules::run('type_request/getNameByTypeRequestId', $query[$key]['type_request_id']);
-			$query[$key]['cedula'] = modules::run('user/getCedulaByUserId', $query[$key]['user_id']);
+			$query[$key]['cedula'] = modules::run('applicant/getCedulaApplicantById', $query[$key]['applicant_id']);
 			$query[$key]['status'] = $this->getStatusNameById($query[$key]['status_id']);
-			$query[$key]['isChecked'] = $this->request_model->noExistDairyAttachment($query[$key]['id']);
+			$query[$key]['nombre'] = modules::run('applicant/getNombreApplicantById',$query[$key]['applicant_id']);
+			$query[$key]['isChecked'] = $this->request_model->noExistDiaryAttachment($query[$key]['id']);
 		}
+		//die_pre($query);
 		return $query;
 	}
 

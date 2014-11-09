@@ -92,7 +92,7 @@ class Request_model extends CI_Model
 	}
 
 	//OBTIENE TODOS LAS SOLICITUDES QUE NO ESTAN RECIBIDAS
-	function getRequestsForDairy()
+	function getRequestsForDiary()
 	{
 		$this->db->order_by("date", "desc"); 
 		$this->db->where('status_id', 6);
@@ -100,7 +100,7 @@ class Request_model extends CI_Model
 		return $query->result();
 	}
 
-	function noExistDairyAttachment($request_id)
+	function noExistDiaryAttachment($request_id)
 	{
 		$query = $this->db->get_where('diary_attachment', array('request_id'=>$request_id));
 		return $query->num_rows() == 0;

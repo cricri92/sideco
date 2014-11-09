@@ -8,27 +8,30 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Cédula</th>
+                            <th>Nombre</th>
                             <th>Tipo</th>
                             <th>Fecha</th>
                             <th>Hora</th>
-                            <th>CI Solicitante</th>
                             <th>Estatus</th>
-                            <th>Agregar</th>
-                            <th>Eliminar</th>
+                            <th>Revisión</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach($requests as $key => $value):  ?>
                             <tr>
                                 <td><?php echo $value['id']; ?></td>
+                                <td><?php echo $value['cedula']; ?></td>
+                                <td><?php echo $value['nombre']; ?></td>
                                 <td><?php echo $value['type_request']; ?></td>
                                 <td><?php echo $value['date']; ?></td>
                                 <td><?php echo substr($value['create_at'], 11)?></td>
-                                <td><?php echo $value['cedula']; ?></td>
                                 <td><?php echo $value['status']; ?></td>
-                                <!-- checked -->
+                                <td><a href="backend/solicitudes/veredicto/<?php echo $value['id']; ?>">Ver solicitud</a></td>
+                                <!-- checked 
                                 <td><input type="radio" name="agregar[]" value="<?php echo $value['id']; ?>"></td>
-                                <td><input type="radio" name="eliminar[]" value="<?php echo $value['id']; ?>"></td>
+                                <td><input type="radio" name="eliminar[]" value="<?php echo $value['id']; ?>"></td> -->
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

@@ -14,12 +14,12 @@ class Diary_model extends CI_Model
 		return $query->num_rows() == 0;
 	}
 
-	function insertDairy($data)
+	function insertDiary($data)
 	{
 		$this->db->insert('diary', $data);	
 	}
 
-	function noExistDairyAttachment($request_id)
+	function noExistDiaryAttachment($request_id)
 	{
 		$query = $this->db->get_where('diary_attachment', array('request_id'=>$request_id));
 		return $query->num_rows() == 0;
@@ -30,13 +30,13 @@ class Diary_model extends CI_Model
 		$this->db->insert('diary_attachment', array('request_id'=>$request_id));
 	}
 	
-	function getDairyRequest()
+	function getDiaryRequest()
 	{
 		$query = $this->db->get('diary_attachment');
 		return $query->result();
 	}
 
-	function getRequestsForDairy()
+	function getRequestsForDiary()
 	{
 		$this->db->order_by("date", "desc"); 
 		$this->db->where('status_id', 6);

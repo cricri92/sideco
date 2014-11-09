@@ -49,7 +49,7 @@ class Diary extends MX_Controller{
 					'consideration' => $this->input->post('consideration')
 				);
 
-				$this->diary_model->insertDairy($data);
+				$this->diary_model->insertDiary($data);
 
 				redirect('backend');
 			}
@@ -68,13 +68,13 @@ class Diary extends MX_Controller{
 		}
 	}
 
-	public function getDairyRequest()
+	public function getDiaryRequest()
 	{
-		$query = $this->diary_model->getDairyRequest();
+		$query = $this->diary_model->getDiaryRequest();
 		$query = objectSQL_to_array($query);
 		foreach ($query as $key => $value) 
 		{
-			$query[$key]['isChecked'] = $this->noExistDairyAttachment($query[$key]['id']);
+			$query[$key]['isChecked'] = $this->noExistDiaryAttachment($query[$key]['id']);
 		}
 		return $query;
 	}
@@ -86,14 +86,14 @@ class Diary extends MX_Controller{
 		{
 			$user_id = modules::run('user/getSessionId');
 			$data['userData'] = modules::run('user/getUserData', $user_id);
-			$data['title'] = 'Backend - Agragar solicitudes';
-			$data['requests'] = modules::run('request/getRequestsForDairy');
-			$data['dairyRequests'] = $this->getDairyRequest();
+			$data['title'] = 'Backend - Agregar solicitudes';
+			$data['requests'] = modules::run('request/getRequestsForDiary');
+			$data['diaryRequests'] = $this->getDiaryRequest();
 			foreach($data['requests'] as $key => $value)
 			{
-				foreach ($data['dairyRequests'] as $k => $v) 
+				foreach ($data['diaryRequests'] as $k => $v) 
 				{
-					if($data['requests'][$key]['id'] == $data['dairyRequests'][$k]['request_id'])
+					if($data['requests'][$key]['id'] == $data['diaryRequests'][$k]['request_id'])
 					{
 						$data['requests'][$key]['isChecked'] = 1;
 					}
@@ -108,9 +108,9 @@ class Diary extends MX_Controller{
 		}
 	}
 
-	public function noExistDairyAttachment($request_id)
+	public function noExistDiaryAttachment($request_id)
 	{
-		return $this->diary_model->noExistDairyAttachment($request_id);
+		return $this->diary_model->noExistDiaryAttachment($request_id);
 	}
 
 	public function addRequest()
@@ -122,7 +122,7 @@ class Diary extends MX_Controller{
 				foreach($_POST['agregar'] as $key => $value)
 				{
 					$request_id = $_POST['agregar'][$key];
-					if($this->noExistDairyAttachment($request_id))
+					if($this->noExistDiaryAttachment($request_id))
 					{
 						$this->diary_model->insertRequest($request_id);
 					}
@@ -133,7 +133,7 @@ class Diary extends MX_Controller{
 				foreach($_POST['eliminar'] as $key => $value)
 				{
 					$request_id = $_POST['eliminar'][$key];
-					if(!$this->noExistDairyAttachment($request_id))
+					if(!$this->noExistDiaryAttachment($request_id))
 					{
 						$this->diary_model->deleteRequest($request_id);
 					}
