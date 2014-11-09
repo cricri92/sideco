@@ -47,4 +47,10 @@ $(function () {
             $('#dependence_id').val(1); 
         }
     });
+/*
+    $("#date_picker").click(function(){
+        var id = $(this).val("id");
+        var val = $("label[for='" + id + "']").text();
+        $("#msg").text(val + " changed");
+    });*/
 });

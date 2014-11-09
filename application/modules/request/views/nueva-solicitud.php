@@ -21,7 +21,7 @@
 				    	<select class="form-control" name="dependence_id" id="dependence_id">
 				    		<option value="">Seleccione</option>
 				    		<?php foreach($dependences as $key => $value):  ?>
-				    			<option value= <"?php echo $value['id']; ?>"> <?php echo $value['name']; ?> </option>
+				    			<option value= "<?php echo $value['id']; ?>"> <?php echo $value['name']; ?> </option>
 				    		<?php endforeach; ?>
 				    	</select>
 			    			<?php echo form_error('dependence_id'); ?>

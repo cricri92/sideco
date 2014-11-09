@@ -7,18 +7,18 @@
 	      	<div class="panel-body">
 	        	<form action="backend/consejeros/crear-consejero" method="POST">
 					<div class="form-group">
-						<label for="">Nombre</label>
-						<input type="text" name="name" value="<?php echo set_value('name'); ?>"/>
+						<label for="exampleInputEmail1">Nombre</label>
+						<input class="form-control" type="text" name="name" value="<?php echo set_value('name'); ?>"/>
 						<?php echo form_error('name'); ?>
 					</div>
 					<div class="form-group">
-						<label for="">Apellido</label>
-						<input type="text" name="lastname" value="<?php echo set_value('lastname'); ?>"/>
+						<label for="exampleInputEmail1">Apellido</label>
+						<input class="form-control" type="text" name="lastname" value="<?php echo set_value('lastname'); ?>"/>
 						<?php echo form_error('lastname'); ?>
 					</div>
 					<div id="counselor" class="form-group" >
-				    	<label for="exampleInputPassword1">Tipo de Consejero</label>
-				    	<select name="counselor_type_id">
+				    	<label for="exampleInputEmail1">Tipo de Consejero</label>
+				    	<select class="form-control" name="counselor_type_id">
 				    		<option value="0">Seleccione</option>
 				    		<?php foreach($counselor_type as $key => $value):  ?>
 				    			<option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
