@@ -33,7 +33,7 @@
 			    	<p><?php echo $request['description']; ?></p>
 			  	</div>
 			  	<div class="form-group">
-			  		Adjuntos...
+			  		<strong>Adjuntos...</strong>
 			  	</div>
 			  	<div class="form-group">
 			  		<label for="exampleInputPassword1">Veredicto:</label> <br>

@@ -308,7 +308,6 @@ class Request extends MX_Controller{
 				}
 				else
 				{
-					$data['agenda'] = 1;
 					$data['status_id'] = 6;
 				}
 
@@ -323,8 +322,6 @@ class Request extends MX_Controller{
 				$data['title'] = 'Backend - Solicitud';
 				$data['status'] = $this->getStatus();
 				$data['request'] = $this->getRequest($request_id);
-				$aux = modules::run('applicant/getApplicantNameByApplicantId',$data['request']['applicant_id']);
-				$data['name'] = $aux['name'];
 				die_pre($data);
 				$data['contenido_principal'] = $this->load->view('ver-solicitud', $data, true);
 				$this->load->view('back/template', $data);
