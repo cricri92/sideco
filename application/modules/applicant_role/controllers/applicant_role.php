@@ -93,11 +93,10 @@ class Applicant_role extends MX_Controller{
 		}
 	}
 
-	public function getApplicantRoleById($id)
+	public function getNameRoleById($role_id)
 	{
-		$query = $this->applicantrole_model->getApplicantRoleById($id);
-		$query = SQL_to_array($query);
-		return $query;
+		return $this->applicantrole_model->getNameRoleById($role_id);
+		
 	}
 
 

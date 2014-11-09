@@ -238,17 +238,13 @@ class Applicant extends MX_Controller
 	//OBTENGO LA CEDULA DE UN SOLICITANTE POR SU ID
 	public function getCedulaApplicantById($applicant_id)
 	{
-		$query = $this->applicant_model->getCedulaApplicantById($applicant_id);
-		$query = SQL_to_array($query);
-		return $query['cedula'];
+		return $this->applicant_model->getCedulaApplicantById($applicant_id);
 	}
 
 	//OBTENGO LA CEDULA DE UN SOLICITANTE POR SU ID
 	public function getApplicantIdByCedula($cedula)
 	{
-		$query = $this->applicant_model->getApplicantIdByCedula($cedula);
-		$query = SQL_to_array($query);
-		return $query;
+		return $this->applicant_model->getApplicantIdByCedula($cedula);
 	}
 
 	public function getNombreApplicantById($applicant_id)

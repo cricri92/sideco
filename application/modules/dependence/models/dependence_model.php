@@ -79,5 +79,6 @@ class Dependence_model extends CI_Model
 	{
 		$this->db->delete('dependence', array('slug' => $slug)); 
 	}
+
 }
 ?>

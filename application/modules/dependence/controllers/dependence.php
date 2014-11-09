@@ -218,6 +218,10 @@ class Dependence extends MX_Controller{
 		echo json_encode($query);
 	}
 
-}
+	public function	getDependenceNameById($dependence_id)
+	{
+		return $this->dependence_model->getDependenceNameById($dependence_id);
+	}
 
+}
 ?>

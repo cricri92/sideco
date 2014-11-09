@@ -4,13 +4,11 @@ function die_pre($data)
 {
 	die('<pre>'.print_r($data, true).'</pre>');
 }
-
 function pre($data)
 {
 	echo '<pre>'.print_r($data, true).'</pre>';
 }
-
-//ESTA FUNCION CONVIERTE UN OBEJTO RESULT SQL EN ARRAY - RESULT
+//ESTA FUNCION CONVIERTE UN OBEJTO RESULT SQL EN ARRAY
 function objectSQL_to_array($object_sql)
 {
 	//OBJETO QUE DEVUELVE LA FUNCION (ARRAY)
@@ -26,11 +24,8 @@ function objectSQL_to_array($object_sql)
 		}
 		$obj_array[$i++] = $aux_array;
 	}
-
 	return $obj_array;
 }
-
-//ROW
 function SQL_to_array($object_sql)
 {
 	$array = array();
@@ -38,6 +33,5 @@ function SQL_to_array($object_sql)
 	{
 		$array[$key] = $value;
 	}
-
 	return $array;
 }

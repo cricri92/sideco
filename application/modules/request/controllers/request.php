@@ -262,9 +262,11 @@ class Request extends MX_Controller{
 		$query = $this->request_model->getRequest($request_id);
 		$query = SQL_to_array($query);
 		$query['name'] = modules::run('applicant/getNameByApplicantId',$query['applicant_id']);
-		$query['cedula'] = modules::run('applicant/getCedulaByApplicantId',$query['applicant_id']);
-		die_pre($query);
+		$query['cedula'] = modules::run('applicant/getCedulaApplicantById',$query['applicant_id']);
 		$query['type_request'] = modules::run('type_request/getNameByTypeRequestId',$query['type_request_id']);
+		$query['role'] = modules::run('applicant_role/getNameRoleById',$query['type_applicant_id']);
+		$query['dependence'] = modules::run('dependence/getDependenceNameById',$query['dependence_id']);
+		//die_pre($query);
 		return $query; 
 	}
 

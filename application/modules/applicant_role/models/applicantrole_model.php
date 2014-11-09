@@ -39,4 +39,10 @@ class Applicantrole_model extends CI_Model
 		$query = $this->db->get_where('type_applicant',array('id'=>$id));
 		return $query->row();
 	}
+
+	function getNameRoleById($id)
+	{
+		$query = $this->db->get_where('type_applicant',array('id'=>$id));
+		return $query->row()->name;
+	}
 }
