@@ -49,6 +49,11 @@ class Diary_model extends CI_Model
 		$this->db->delete('diary_attachment', array('request_id'=>$request_id));
 	}
 	
+	function getDiaryType()
+	{
+		$query = $this->db->get('diary_type');
+		return $query->result();
+	}
 }  
 
 ?>

@@ -16,7 +16,7 @@ class Diary extends MX_Controller{
 			$user_id = modules::run('user/getSessionId');
 			$data['userData'] = modules::run('user/getUserData', $user_id);
 			$data['title'] = 'Backend - Nueva agenda';
-			$data['diary_info'] = $this->getDiaryType();
+			$data['meeting_type'] = $this->getDiaryType();
 			$data['contenido_principal'] = $this->load->view('nueva-agenda', $data, true);
 			$this->load->view('back/template', $data);
 		}
@@ -45,7 +45,7 @@ class Diary extends MX_Controller{
 			$this->form_validation->set_rules('num_acta','Numero de acta','required|trim|callback_noExistDiaryNumber');
 			$this->form_validation->set_rules('date', 'Fecha', 'required');
 			$this->form_validation->set_rules('consideration','Consideracion','required');
-			$this->form_validation->set_rules('meeting_type','Tipo de Reunion','required')
+			$this->form_validation->set_rules('meeting_type_id','Tipo de Reunion','required');
 
 			$this->form_validation->set_message('required', '%s es requerido.');
 			$this->form_validation->set_message('noExistDiaryNumber', '%s existe');
@@ -56,7 +56,7 @@ class Diary extends MX_Controller{
 					'num_acta' 	=> $this->input->post('num_acta'),
 					'date'		=> date('Y-m-d'),
 					'consideration' => $this->input->post('consideration'),
-					'meeting_type' => $this->input->post('meeting_type')
+					'diary_type_id' => $this->input->post('meeting_type_id')
 				);
 
 				$this->diary_model->insertDiary($data);
@@ -65,6 +65,7 @@ class Diary extends MX_Controller{
 			}
 			else
 			{
+				die_pre(validation_errors());
 				$user_id = modules::run('user/getSessionId');
 				$data['userData'] = modules::run('user/getUserData', $user_id);
 				$data['title'] = 'Backend - Nueva agenda';

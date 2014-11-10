@@ -29,7 +29,7 @@
 				  	</div>
 				  	<div class="form-group">
 				  		<label for="exampleInputEmail1">Tipo de reunión</label>
-				  		<select name="meeting_type" id="" class="form-control">
+				  		<select name="meeting_type_id" id="" class="form-control">
 				  			<option value="">Seleccione</option>
 				  			<?php foreach($meeting_type as $key => $value): ?>
 				  				<option value="<?php echo $value['id']; ?>"> <?php echo $value['name']; ?> </option>
