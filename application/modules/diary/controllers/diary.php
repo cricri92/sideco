@@ -16,6 +16,7 @@ class Diary extends MX_Controller{
 			$user_id = modules::run('user/getSessionId');
 			$data['userData'] = modules::run('user/getUserData', $user_id);
 			$data['title'] = 'Backend - Nueva agenda';
+			$data['diary_info'] = $this->getDiaryType();
 			$data['contenido_principal'] = $this->load->view('nueva-agenda', $data, true);
 			$this->load->view('back/template', $data);
 		}
@@ -30,13 +31,21 @@ class Diary extends MX_Controller{
 		return $this->diary_model->noExistDiaryNumber($num_acta);
 	}
 
+	function getDiaryType()
+	{
+		$query = $this->diary_model->getDiaryType();
+		$query = objectSQL_to_array($query);
+		return $query;
+	}
+
 	public function createDiary()
 	{
 		if(!empty($_POST))
 		{
-			$this->form_validation->set_rules('num_acta','Numero de acta', 'required|trim|callback_noExistDiaryNumber');
+			$this->form_validation->set_rules('num_acta','Numero de acta','required|trim|callback_noExistDiaryNumber');
 			$this->form_validation->set_rules('date', 'Fecha', 'required');
 			$this->form_validation->set_rules('consideration','Consideracion','required');
+			$this->form_validation->set_rules('meeting_type','Tipo de Reunion','required')
 
 			$this->form_validation->set_message('required', '%s es requerido.');
 			$this->form_validation->set_message('noExistDiaryNumber', '%s existe');
@@ -46,7 +55,8 @@ class Diary extends MX_Controller{
 				$data = array(
 					'num_acta' 	=> $this->input->post('num_acta'),
 					'date'		=> date('Y-m-d'),
-					'consideration' => $this->input->post('consideration')
+					'consideration' => $this->input->post('consideration'),
+					'meeting_type' => $this->input->post('meeting_type')
 				);
 
 				$this->diary_model->insertDiary($data);
@@ -58,6 +68,7 @@ class Diary extends MX_Controller{
 				$user_id = modules::run('user/getSessionId');
 				$data['userData'] = modules::run('user/getUserData', $user_id);
 				$data['title'] = 'Backend - Nueva agenda';
+				$data['createDiary'] = $this->getDiaryType();
 				$data['contenido_principal'] = $this->load->view('nueva-agenda', $data, true);
 				$this->load->view('back/template', $data);
 			}

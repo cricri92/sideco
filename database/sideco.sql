@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-11-2014 a las 13:51:04
+-- Tiempo de generación: 10-11-2014 a las 23:37:40
 -- Versión del servidor: 5.6.20
 -- Versión de PHP: 5.5.15
 
@@ -127,20 +127,13 @@ INSERT INTO `dependence` (`id`, `name`, `subject_id`, `slug`, `create_at`, `upda
 
 CREATE TABLE IF NOT EXISTS `diary` (
 `id` int(11) NOT NULL,
-  `diary_type` varchar(255) NOT NULL,
+  `diary_type_id` int(11) NOT NULL,
   `num_acta` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `consideration` varchar(255) DEFAULT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `diary`
---
-
-INSERT INTO `diary` (`id`, `diary_type`, `num_acta`, `date`, `consideration`, `create_at`, `update_at`) VALUES
-(1, '0', 'N009/12/2014', '2014-09-10', 'Consideracion', '2014-11-04 07:14:05', '2014-11-04 07:14:05');
 
 -- --------------------------------------------------------
 
@@ -154,6 +147,27 @@ CREATE TABLE IF NOT EXISTS `diary_attachment` (
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `diary_type`
+--
+
+CREATE TABLE IF NOT EXISTS `diary_type` (
+`id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_a` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `diary_type`
+--
+
+INSERT INTO `diary_type` (`id`, `name`, `create_at`, `update_a`) VALUES
+(1, 'Ordinaria', '2014-11-10 22:15:26', '2014-11-10 22:15:26'),
+(2, 'Extraordinaria', '2014-11-10 22:15:26', '2014-11-10 22:15:26');
 
 -- --------------------------------------------------------
 
@@ -386,13 +400,19 @@ ALTER TABLE `dependence`
 -- Indices de la tabla `diary`
 --
 ALTER TABLE `diary`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `diary_type_id` (`diary_type`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `diary_type_id` (`diary_type_id`), ADD KEY `diary_type_id_2` (`diary_type_id`);
 
 --
 -- Indices de la tabla `diary_attachment`
 --
 ALTER TABLE `diary_attachment`
  ADD PRIMARY KEY (`id`), ADD KEY `request_id` (`request_id`);
+
+--
+-- Indices de la tabla `diary_type`
+--
+ALTER TABLE `diary_type`
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `privilege`
@@ -483,6 +503,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 ALTER TABLE `diary_attachment`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `diary_type`
+--
+ALTER TABLE `diary_type`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT de la tabla `privilege`
 --
 ALTER TABLE `privilege`
@@ -536,6 +561,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 ALTER TABLE `counselor`
 ADD CONSTRAINT `counselor_ibfk_1` FOREIGN KEY (`counselor_type_id`) REFERENCES `counselor_type` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `diary`
+--
+ALTER TABLE `diary`
+ADD CONSTRAINT `diary_ibfk_1` FOREIGN KEY (`diary_type_id`) REFERENCES `diary_type` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `diary_attachment`

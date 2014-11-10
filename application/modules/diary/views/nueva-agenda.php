@@ -23,9 +23,18 @@
 				  	</div>
 				  	<input type="hidden" name="status_id" value="5">
 				  	<div class="form-group">
-				    	<label for="exampleInputEmail1">Numero de Agenda</label>
+				    	<label for="exampleInputEmail1">Número de Agenda</label>
 				    	<input type="text" class="form-control" name="num_acta" placeholder=""></input>
 				    	<?php echo form_error('num_acta'); ?>
+				  	</div>
+				  	<div class="form-group">
+				  		<label for="exampleInputEmail1">Tipo de reunión</label>
+				  		<select name="meeting_type" id="" class="form-control">
+				  			<option value="">Seleccione</option>
+				  			<?php foreach($meeting_type as $key => $value): ?>
+				  				<option value="<?php echo $value['id']; ?>"> <?php echo $value['name']; ?> </option>
+				    		<?php endforeach; ?>
+				    	</select>
 				  	</div>
 				  	<!--
 					<div class="form-group">
