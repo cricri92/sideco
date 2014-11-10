@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="../../favicon.ico">
+        <link href="assets/back/img/favicon.ico" rel="icon" type="image/x-icon" />
 
         <title><?php echo $title; ?></title>
 

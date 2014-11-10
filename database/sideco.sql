@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-11-2014 a las 12:00:19
+-- Tiempo de generación: 10-11-2014 a las 13:51:04
 -- Versión del servidor: 5.6.20
 -- Versión de PHP: 5.5.15
 
@@ -28,24 +28,25 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `applicant` (
 `id` int(11) NOT NULL,
-  `type_applicant_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `cedula` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `dependence_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `applicant`
 --
 
-INSERT INTO `applicant` (`id`, `type_applicant_id`, `name`, `cedula`, `email`, `password`, `slug`, `create_at`, `update_at`, `dependence_id`) VALUES
-(1, 1, 'Kiara Ottogalli', '1234456', 'kottogalli@sideco.com', '5ae955fb17babdbb07a3c3ff012dd7c8850af77f', 'kiara-ottogalli', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 8),
-(2, 1, 'Antonio Castañeda', '9483823', 'castaneda@redesfacyt.com', '8cb2237d0679ca88db6464eac60da96345513964', 'antonio-castaneda', '2014-11-06 20:12:16', '2014-11-06 20:12:16', 7);
+INSERT INTO `applicant` (`id`, `name`, `cedula`, `email`, `password`, `slug`, `create_at`, `update_at`) VALUES
+(1, 'Kiara Ottogalli', '1234456', 'kottogalli@sideco.com', '5ae955fb17babdbb07a3c3ff012dd7c8850af77f', 'kiara-ottogalli', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Antonio Castañeda', '9483823', 'castaneda@redesfacyt.com', '8cb2237d0679ca88db6464eac60da96345513964', 'antonio-castaneda', '2014-11-06 20:12:16', '2014-11-06 20:12:16'),
+(5, 'María Fátima de Abreu', '23456', 'mfdabreu@sideco.com', 'c24d0a1968e339c3786751ab16411c2c24ce8a2e', 'maria-fatima-de-abreu', '2014-11-08 14:18:50', '2014-11-08 14:18:50'),
+(8, 'Elsa Tovar', '45678', 'etovar@sideco.com', '3b4f3367054b005bf971f96026b4a55003189565', 'elsa-tovar', '2014-11-08 14:22:38', '2014-11-08 14:22:38'),
+(10, 'Amadis Martinez', '897456', 'amartinez@sideco.com', '', 'amadis-martinez', '2014-11-08 16:25:54', '2014-11-08 16:25:54');
 
 -- --------------------------------------------------------
 
@@ -56,10 +57,19 @@ INSERT INTO `applicant` (`id`, `type_applicant_id`, `name`, `cedula`, `email`, `
 CREATE TABLE IF NOT EXISTS `counselor` (
 `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
   `counselor_type_id` int(11) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `counselor`
+--
+
+INSERT INTO `counselor` (`id`, `name`, `lastname`, `counselor_type_id`, `create_at`, `update_at`) VALUES
+(1, 'Amadis', 'Martinez', 4, '2014-11-08 11:14:24', '2014-11-08 11:14:24'),
+(2, 'Marylin', 'Giugni', 1, '2014-11-08 12:29:37', '2014-11-08 12:29:37');
 
 -- --------------------------------------------------------
 
@@ -72,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `counselor_type` (
   `name` varchar(255) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `counselor_type`
@@ -82,7 +92,8 @@ INSERT INTO `counselor_type` (`id`, `name`, `create_at`, `update_at`) VALUES
 (1, 'Representante de los profesores', '2014-11-07 05:41:56', '2014-11-07 05:41:56'),
 (2, 'Representante de los estudiantes', '2014-11-07 05:41:56', '2014-11-07 05:41:56'),
 (3, 'Representante suplente de los PROFESORES', '2014-11-07 05:43:34', '2014-11-07 05:43:34'),
-(4, 'Director (E)-PRESIDENTE', '2014-11-07 05:43:34', '2014-11-07 05:43:34');
+(4, 'Director (E)-PRESIDENTE', '2014-11-07 05:43:34', '2014-11-07 05:43:34'),
+(5, 'Representante suplente de los estudiantes', '2014-11-08 10:11:31', '2014-11-08 10:11:31');
 
 -- --------------------------------------------------------
 
@@ -93,19 +104,20 @@ INSERT INTO `counselor_type` (`id`, `name`, `create_at`, `update_at`) VALUES
 CREATE TABLE IF NOT EXISTS `dependence` (
 `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `subject_id` int(11) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `dependence`
 --
 
-INSERT INTO `dependence` (`id`, `name`, `slug`, `create_at`, `update_at`) VALUES
-(7, 'Ninguna', 'ninguna', '2014-11-06 06:27:36', '2014-11-06 06:43:25'),
-(8, 'Preparadores', 'preparadores', '2014-11-06 06:27:45', '2014-11-06 06:27:45'),
-(9, 'Coordinacion de Pasantias', 'coordinacion-de-pasantias', '2014-11-06 06:43:44', '2014-11-06 06:43:44');
+INSERT INTO `dependence` (`id`, `name`, `subject_id`, `slug`, `create_at`, `update_at`) VALUES
+(1, 'Preparadores', 0, 'preparadores', '2014-11-08 19:07:33', '2014-11-08 19:07:33'),
+(2, 'Pasantías', 0, 'pasantias', '2014-11-08 19:07:53', '2014-11-08 19:07:53'),
+(3, 'Ninguna', 0, 'ninguna', '2014-11-08 19:11:05', '2014-11-08 19:11:05');
 
 -- --------------------------------------------------------
 
@@ -115,9 +127,10 @@ INSERT INTO `dependence` (`id`, `name`, `slug`, `create_at`, `update_at`) VALUES
 
 CREATE TABLE IF NOT EXISTS `diary` (
 `id` int(11) NOT NULL,
+  `diary_type` varchar(255) NOT NULL,
   `num_acta` varchar(255) NOT NULL,
   `date` date NOT NULL,
-  `consideration` varchar(255) NOT NULL,
+  `consideration` varchar(255) DEFAULT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
@@ -126,8 +139,8 @@ CREATE TABLE IF NOT EXISTS `diary` (
 -- Volcado de datos para la tabla `diary`
 --
 
-INSERT INTO `diary` (`id`, `num_acta`, `date`, `consideration`, `create_at`, `update_at`) VALUES
-(1, 'N009/12/2014', '2014-09-10', 'Consideracion', '2014-11-04 07:14:05', '2014-11-04 07:14:05');
+INSERT INTO `diary` (`id`, `diary_type`, `num_acta`, `date`, `consideration`, `create_at`, `update_at`) VALUES
+(1, '0', 'N009/12/2014', '2014-09-10', 'Consideracion', '2014-11-04 07:14:05', '2014-11-04 07:14:05');
 
 -- --------------------------------------------------------
 
@@ -140,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `diary_attachment` (
   `request_id` int(11) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -172,20 +185,22 @@ INSERT INTO `privilege` (`id`, `name`, `create_at`, `update_at`) VALUES
 CREATE TABLE IF NOT EXISTS `request` (
 `id` int(11) NOT NULL,
   `type_request_id` int(11) NOT NULL,
+  `type_applicant_id` int(11) NOT NULL,
+  `dependence_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `status_id` int(11) NOT NULL,
   `applicant_id` int(11) NOT NULL,
   `description` text NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=44 ;
 
 --
 -- Volcado de datos para la tabla `request`
 --
 
-INSERT INTO `request` (`id`, `type_request_id`, `date`, `status_id`, `applicant_id`, `description`, `create_at`, `update_at`) VALUES
-(22, 1, '2014-11-19', 5, 1, 'Esta es una descoopadea', '2014-11-06 23:24:29', '2014-11-06 23:24:29');
+INSERT INTO `request` (`id`, `type_request_id`, `type_applicant_id`, `dependence_id`, `date`, `status_id`, `applicant_id`, `description`, `create_at`, `update_at`) VALUES
+(43, 1, 1, 3, '2014-11-08', 6, 10, 'Permiso de Ana Aguilera', '2014-11-08 20:55:09', '2014-11-09 07:09:47');
 
 -- --------------------------------------------------------
 
@@ -200,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `request_attachment` (
   `type` varchar(255) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -251,6 +266,19 @@ INSERT INTO `status` (`id`, `name`, `create_at`, `update_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `subject_schedule_point`
+--
+
+CREATE TABLE IF NOT EXISTS `subject_schedule_point` (
+`id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `type_applicant`
 --
 
@@ -259,15 +287,16 @@ CREATE TABLE IF NOT EXISTS `type_applicant` (
   `name` varchar(255) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `type_applicant`
 --
 
 INSERT INTO `type_applicant` (`id`, `name`, `create_at`, `update_at`) VALUES
-(1, 'Profesor', '2014-11-03 01:16:26', '2014-11-03 01:16:26'),
-(2, 'Estudiante', '2014-11-03 01:16:26', '2014-11-03 01:16:26');
+(1, 'Profesor', '2014-11-08 18:33:19', '2014-11-08 18:33:19'),
+(2, 'Tutor', '2014-11-08 18:34:05', '2014-11-08 18:34:05'),
+(3, 'Coordinador', '2014-11-08 18:34:15', '2014-11-08 18:34:15');
 
 -- --------------------------------------------------------
 
@@ -281,7 +310,7 @@ CREATE TABLE IF NOT EXISTS `type_request` (
   `slug` varchar(255) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `type_request`
@@ -290,8 +319,8 @@ CREATE TABLE IF NOT EXISTS `type_request` (
 INSERT INTO `type_request` (`id`, `name`, `slug`, `create_at`, `update_at`) VALUES
 (1, 'Asuntos profesorales', 'asuntos-profesorales', '2014-11-02 20:18:10', '2014-11-02 20:19:03'),
 (2, 'Asuntos estudiantiles', 'asuntos-estudiantiles', '2014-11-02 20:41:34', '2014-11-02 20:41:34'),
-(3, 'Oriana', 'oriana', '2014-11-02 21:17:28', '2014-11-02 21:17:28'),
-(4, 'Gordito', 'gordito', '2014-11-03 03:19:50', '2014-11-03 03:19:50');
+(5, 'Coordinacion de Pasantias', 'coordinacion-de-pasantias', '2014-11-08 12:45:37', '2014-11-08 12:45:37'),
+(6, 'Coordinacion de Preparadores', 'coordinacion-de-preparadores', '2014-11-08 12:45:59', '2014-11-08 12:45:59');
 
 -- --------------------------------------------------------
 
@@ -333,13 +362,13 @@ INSERT INTO `userback` (`id`, `username`, `name`, `email`, `password`, `privileg
 -- Indices de la tabla `applicant`
 --
 ALTER TABLE `applicant`
- ADD PRIMARY KEY (`id`), ADD KEY `type_applicant_id` (`type_applicant_id`), ADD KEY `dependence_id` (`dependence_id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `counselor`
 --
 ALTER TABLE `counselor`
- ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `id` (`counselor_type_id`);
 
 --
 -- Indices de la tabla `counselor_type`
@@ -357,7 +386,7 @@ ALTER TABLE `dependence`
 -- Indices de la tabla `diary`
 --
 ALTER TABLE `diary`
- ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `diary_type_id` (`diary_type`);
 
 --
 -- Indices de la tabla `diary_attachment`
@@ -375,7 +404,7 @@ ALTER TABLE `privilege`
 -- Indices de la tabla `request`
 --
 ALTER TABLE `request`
- ADD PRIMARY KEY (`id`), ADD KEY `type_request_id` (`type_request_id`), ADD KEY `status_id` (`status_id`), ADD KEY `user_id` (`applicant_id`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `type_applicant_id` (`type_applicant_id`), ADD UNIQUE KEY `dependence_id` (`dependence_id`), ADD KEY `type_request_id` (`type_request_id`), ADD KEY `status_id` (`status_id`), ADD KEY `user_id` (`applicant_id`);
 
 --
 -- Indices de la tabla `request_attachment`
@@ -393,6 +422,12 @@ ALTER TABLE `semester`
 -- Indices de la tabla `status`
 --
 ALTER TABLE `status`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `subject_schedule_point`
+--
+ALTER TABLE `subject_schedule_point`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -421,22 +456,22 @@ ALTER TABLE `userback`
 -- AUTO_INCREMENT de la tabla `applicant`
 --
 ALTER TABLE `applicant`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `counselor`
 --
 ALTER TABLE `counselor`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `counselor_type`
 --
 ALTER TABLE `counselor_type`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `dependence`
 --
 ALTER TABLE `dependence`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `diary`
 --
@@ -446,7 +481,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT de la tabla `diary_attachment`
 --
 ALTER TABLE `diary_attachment`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `privilege`
 --
@@ -456,12 +491,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT de la tabla `request`
 --
 ALTER TABLE `request`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT de la tabla `request_attachment`
 --
 ALTER TABLE `request_attachment`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `semester`
 --
@@ -473,15 +508,20 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 ALTER TABLE `status`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
+-- AUTO_INCREMENT de la tabla `subject_schedule_point`
+--
+ALTER TABLE `subject_schedule_point`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `type_applicant`
 --
 ALTER TABLE `type_applicant`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `type_request`
 --
 ALTER TABLE `type_request`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `userback`
 --
@@ -492,11 +532,10 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 
 --
--- Filtros para la tabla `applicant`
+-- Filtros para la tabla `counselor`
 --
-ALTER TABLE `applicant`
-ADD CONSTRAINT `applicant_ibfk_1` FOREIGN KEY (`type_applicant_id`) REFERENCES `type_applicant` (`id`) ON DELETE CASCADE,
-ADD CONSTRAINT `applicant_ibfk_2` FOREIGN KEY (`dependence_id`) REFERENCES `dependence` (`id`) ON DELETE CASCADE;
+ALTER TABLE `counselor`
+ADD CONSTRAINT `counselor_ibfk_1` FOREIGN KEY (`counselor_type_id`) REFERENCES `counselor_type` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `diary_attachment`
@@ -510,7 +549,9 @@ ADD CONSTRAINT `diary_attachment_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `
 ALTER TABLE `request`
 ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`type_request_id`) REFERENCES `type_request` (`id`) ON DELETE CASCADE,
 ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`) ON DELETE CASCADE,
-ADD CONSTRAINT `request_ibfk_3` FOREIGN KEY (`applicant_id`) REFERENCES `applicant` (`id`) ON DELETE CASCADE;
+ADD CONSTRAINT `request_ibfk_3` FOREIGN KEY (`applicant_id`) REFERENCES `applicant` (`id`) ON DELETE CASCADE,
+ADD CONSTRAINT `request_ibfk_4` FOREIGN KEY (`type_applicant_id`) REFERENCES `type_applicant` (`id`) ON DELETE CASCADE,
+ADD CONSTRAINT `request_ibfk_5` FOREIGN KEY (`dependence_id`) REFERENCES `dependence` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `request_attachment`
