@@ -59,6 +59,7 @@
                                     <li><a href="backend/solicitudes/nueva-solicitud">Crear Solicitud</a></li>
                                     <li><a href="backend/solicitudes">Revisar Solicitudes</a></li>
                                     <li><a href="backend/solicitudes/nuevo-tipo-solicitud">Nuevo tipo de solicitud</a></li>
+                                    <li><a href="backend/solicitudes/tipos-solicitud">Ver tipos de solicitud</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

@@ -1,5 +1,5 @@
 <br/>
-<div class="col-md-6">
+<div class="col-md-8">
 	<div class="panel panel-primary">
 	   	<div class="panel-heading">
 	  		<h3 class="panel-title">Solicitud #<?php echo $request['id']; ?></h3>
@@ -29,18 +29,29 @@
 					<p><?php echo $request['dependence']; ?></p>
 			  	</div>
 			  	<div class="form-group">
-			    	<label><strong>Descripcion: </strong></label>
+			    	<label><strong>Descripción: </strong></label>
 			    	<p><?php echo $request['description']; ?></p>
 			  	</div>
-			  	<div class="form-group">
-			  		<strong>Adjuntos...</strong>
-			  	</div>
+			  	<?php if(!empty($attachments)): ?>
+					<div class="form-group">
+				  		<?php foreach($attachments as $key => $value): ?>
+							<ul class="list-group">
+								<li class="list-group-item">
+							    	<span class="badge"><?php echo $value['type']; ?></span>
+							    	<a href="assets/back/upload/file/<?php echo $value['name']; ?>"><?php echo $value['name']; ?></a>
+							  	</li>
+							</ul>
+				  		<?php endforeach; ?>
+				  	</div>
+			  	<?php endif; ?>
 			  	<div class="form-group">
 			  		<label for="exampleInputPassword1">Veredicto:</label> <br>
 			    	<p><input type="radio" name="option" value="agenda"> Agregar a la Agenda</p>
 					<p><input type="radio" name="option" value="rechazar"> Descartar</p>
 			  	</div>
-			  	<button type="submit" class="btn btn-default">Guardar</button>
+			  	<a class="btn btn-danger" href="backend/solicitudes/eliminar/<?php echo $request['id']; ?>"><span class="glyphicon glyphicon-remove"></span> Eliminar</a>
+			  	<a class="btn btn-info" href="backend/solicitudes/actualizar/<?php echo $request['id']; ?>"><span class="glyphicon glyphicon-pencil"></span> Actualizar</a>
+			  	<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
 			</form>
 	    </div>
 	</div>

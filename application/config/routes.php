@@ -65,14 +65,23 @@ $route['backend/solicitantes/nuevo-rol-solicitante']		= 'applicant_role/newAppli
 $route['backend/solicitantes/crear-rol-solicitante']		= 'applicant_role/createApplicantRole';
 $route['backend/solicitantes/roles-solicitantes']		    = 'applicant_role/showApplicantRoles';
 
-//SOLICITUDES
+//TIPO DE SOLICITUDES
 $route['backend/solicitudes/nuevo-tipo-solicitud'] 			= 'type_request/newTypeRequest';
+$route['backend/solicitudes/tipos-solicitud']				= 'type_request/showTypeRequest';
+$route['backend/solicitudes/actualizar-tipo-solicitud/(.*)']= 'type_request/updateTypeRequest/$1';	
+$route['backend/solicitudes/actualizar-tipo']				= 'type_request/TypeRequestUpdate';
+$route['backend/solicitudes/eliminar-tipo-solicitud/(.*)'] 	= 'type_request/deleteTypeRequest/$1';
+$route['backend/solicitudes/eliminar-tipo/(.*)']			= 'type_request/TypeRequestDelete/$1';
+
+//SOLICITUDES
 $route['backend/solicitudes/crear-nuevo-tipo-solicitud'] 	= 'type_request/createTypeRequest';
 $route['backend/solicitudes/nueva-solicitud']				= 'request/newRequest';
 $route['backend/solicitudes/crear-solicitud']				= 'request/createRequest';
 $route['backend/solicitudes'] 								= 'request/showAllRequests';
 $route['backend/solicitudes/veredicto/(.*)']				= 'request/changeVeredict/$1';
 $route['backend/solicitudes/dar-veredicto']					= 'request/veredict';
+$route['backend/solicitudes/eliminar/(.*)']					= 'request/deleteRequest/$1';
+$route['backend/solicitudes/eliminar-solicitud/(.*)']		= 'request/requestDelete/$1';			
 
 //AGENDA
 $route['backend/agendas/nueva-agenda']						= 'diary/newDiary';

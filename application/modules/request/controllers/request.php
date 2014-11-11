@@ -268,6 +268,13 @@ class Request extends MX_Controller{
 		return $query; 
 	}
 
+	function getAttachmentByRequestId($request_id)
+	{
+		$query = $this->request_model->getAttachmentByRequestId($request_id);
+		$query = objectSQL_to_array($query);
+		return $query;
+	}
+
 	//DADO UN VEREDICTO MUESTRO UN FORMULARIO CON TODOS SUS DATOS
 	public function changeVeredict($request_id)
 	{
@@ -278,6 +285,7 @@ class Request extends MX_Controller{
 			$data['title'] = 'Backend - Solicitud';
 			$data['status'] = $this->getStatus();
 			$data['request'] = $this->getRequest($request_id);
+			$data['attachments'] = $this->getAttachmentByRequestId($request_id);
 			$data['contenido_principal'] = $this->load->view('ver-solicitud', $data, true);
 			$this->load->view('back/template', $data);
 		}
@@ -386,6 +394,62 @@ class Request extends MX_Controller{
 			$query[$key]['nombre'] = modules::run('applicant/getNombreApplicantById', $query[$key]['applicant_id']);
 		}
 		return $query;
+	}
+
+	public function getRequestBySlug($slug)
+	{
+		$query = $this->request_model->getRequestBySlug($slug);
+		$query = SQL_to_array($query);
+		return $query;
+	}
+
+	public function existRequestBySlug($slug)
+	{
+		return $this->request_model->existRequestBySlug($slug);
+	}
+
+	public function existRequestById($request_id)
+	{
+		return $this->request_model->existRequestById($request_id);
+	}
+
+	public function getRequestById($request_id)
+	{
+		$query = $this->request_model->getRequestById($request_id);
+		$query = SQL_to_array($query);
+		$query['type_request'] = modules::run('type_request/getNameByTypeRequestId', $query['type_request_id']);
+		$query['cedula'] = modules::run('applicant/getCedulaApplicantById', $query['applicant_id']);
+		$query['status'] = $this->getStatusNameById($query['status_id']);
+		$query['name'] = modules::run('applicant/getNombreApplicantById', $query['applicant_id']);
+
+		return $query;
+	}
+
+	public function deleteRequest($request_id)
+	{
+		if(modules::run('user/isAdministrator') && $this->existRequestById($request_id))
+		{
+			$user_id = modules::run('user/getSessionId');
+			$data['userData'] = modules::run('user/getUserData', $user_id);
+			$data['title'] = 'Backend - Eliminar solicitud';
+			$data['request'] = $this->getRequestById($request_id);
+			$data['contenido_principal'] = $this->load->view('eliminar-solicitud', $data, true);
+			$this->load->view('back/template', $data);
+		}
+		else
+		{
+			redirect('backend');
+		}
+	}
+
+	public function requestDelete($request_id)
+	{
+		if(modules::run('user/isAdministrator') && $this->existRequestById($request_id))
+		{
+			$this->request_model->deleteRequest($request_id);
+		}
+
+		redirect('backend/solicitudes');
 	}
 
 }

@@ -1,7 +1,7 @@
 <div class="container">
     <center><h2>Revisar solicitudes</h2></center>
     <div class="col-md-12">
-        <h4>Nuevas solicitudes</h4>
+        <h4><span class="glyphicon glyphicon-star"></span> Nuevas solicitudes</h4>
         <?php if(isset($requestsRecibidas)): ?>
             <table class="table">
                 <thead>
@@ -18,6 +18,7 @@
                 </thead>
                 <tbody>
                     <?php foreach($requestsRecibidas as $key => $value):  ?>
+                        <tr>
                             <td><?php echo $value['id']; ?></td>
                             <td><?php echo $value['nombre']; ?></td>
                             <td><?php echo $value['cedula']; ?></td>
@@ -26,6 +27,7 @@
                             <td><?php echo substr($value['create_at'], 11)?></td>
                             <td><?php echo $value['status']; ?></td>
                             <td><a href="backend/solicitudes/veredicto/<?php echo $value['id']; ?>">Ver solicitud</a></td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>

@@ -7,9 +7,10 @@
 		    <div class="panel-body">
 		        <form role="form" action="backend/solicitudes/crear-nuevo-tipo-solicitud" method="POST">
 			        <div class="form-group">
+			        	<label for="">Nombre tipo de solicitud</label>
 			        	<input type="text" class="form-control" name="name" placeholder="Nuevo tipo">
-						   	<?php echo form_error('name'); ?>
-							<button type="submit" class="btn btn-default btn-group">Guardar</button>
+						<?php echo form_error('name'); ?>
+						<button type="submit" class="btn btn-default btn-group">Guardar</button>
 			        </div>
 		        </form>
 		    </div>

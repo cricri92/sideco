@@ -32,6 +32,41 @@ class TypeRequest_model extends CI_Model
 		$query = $this->db->get_where('type_request', array('id'=>$type_request_id));
 		return $query->row()->name;
 	}
+
+	function isNotDuplicatedTypeRequest($type_request_id, $name)
+	{
+		$query = $this->db->get_where('type_request', array('name'=>$name, 'id !='=>$type_request_id));
+		return $query->num_rows() == 0;
+	}
+
+	function getTypeRequestById($type_request_id)
+	{
+		$query = $this->db->get_where('type_request', array('id'=>$type_request_id));
+		return $query->row();
+	}
+
+	function getTypeRequestBySlug($slug)
+	{
+		$query = $this->db->get_where('type_request', array('slug'=>$slug));
+		return $query->row();
+	}
+
+	function updateTypeRequest($type_request_id, $data)
+	{
+		$this->db->where('id', $type_request_id);
+		$this->db->update('type_request', $data);
+	}
+
+	function deleteTypeRequestBySlug($slug)
+	{
+		$this->db->delete('type_request',array('slug'=>$slug));
+	}
+
+	function existTypeRequestBySlug($slug)
+	{
+		$query = $this->db->get_where('type_request', array('slug'=>$slug));
+		return $query->num_rows() != 0;
+	}
 } 
 
 ?>

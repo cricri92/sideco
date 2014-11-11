@@ -120,6 +120,40 @@ class Request_model extends CI_Model
 		return $query->result();
 	}
 
+	function getAttachmentByRequestId($request_id)
+	{
+		$query = $this->db->get_where('request_attachment', array('request_id'=>$request_id));
+		return $query->result();
+	}
+
+	//DADO UN ELACE LO BORRO
+	function getRequestBySlug($slug)
+	{
+		$this->db->delete('request', array('slug'=>$slug));
+	}
+
+	function existRequestBySlug($slug)
+	{
+		$query = $this->db->get_where('request', array('slug'=>$slug));
+		return $query->num_rows() != 0;
+	}
+
+	function deleteRequest($request_id)
+	{
+		$this->db->delete('request', array('id'=>$request_id));
+	}
+
+	function existRequestById($request_id)
+	{
+		$query = $this->db->get_where('request', array('id'=>$request_id));
+		return $query->num_rows() != 0;
+	}
+
+	function getRequestById($request_id)
+	{
+		$query = $this->db->get_where('request', array('id'=>$request_id));
+		return $query->row();
+	}
 	
 }  
 
