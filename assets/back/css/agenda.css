@@ -1,69 +1,49 @@
-body 
+div
 {
-  padding-top: 70px;
-  background-color: white;
+	margin: 0px;
+	padding: 0px;
 }
-.container 
+#roles_consejo
 {
-  padding: 40px 15px;
-  text-align: center;
+	padding-right: 150px;
+	padding-left: 0px;
+	padding-top: 5px;
 }
-.navbar
+#comentario 
 {
-	background-color: #0099FF;
-	border-color: #0099FF;
+	border: 1px solid black;
 }
-.nav
+#consideracion
 {
-	color: black;
+	padding-bottom: 5px;
 }
-.menu
+.resumen
 {
-	text-align: left;
+	margin-left: 55px;
+	text-align: justify;
 }
-body h2
+.titulos
 {
-	padding-top: 20px;
-	padding-left: 160px;
+	text-decoration: underline;
+	padding-left: 5px;
+	text-transform: uppercase;
 }
-header
+.centrar
 {
+	text-align: center;
+}
+.resolucion
+{
+	border: 1px solid black;
+	text-align: justify;
+	width: 768px;
 	margin-top: 0px;
-	padding-top: 0px;
-	border-image: 0px;
-	border: 0px;
+	margin-bottom: 0px;
+	padding: 0.5em;
 }
-aside
+.punto
 {
-	text-align: right;
-}
- .panel
- {
- 	background-color: #F3F3F3;
- }
- .container
- {
- 	border: 1px solid #f3f3f3;
- }
-.menu-letras li a 
-{
-	color:white;
-}
-#color-t1
-{
-	color: black;
-  font-weight: bold;
-}
-
-#color-p
-{
-  background-color:#99CCFF;
-  border-color: #0099EE;
-  color:black;
-  font-weight:bold;
-}
-
-.panel-footer
-{
-	margin-top: 210px;
+	padding: 8px;
+	margin: 8px;
+	text-align: justify;
 }

@@ -18,6 +18,7 @@
         <link href="assets/back/css/offcanvas.css" rel="stylesheet">
 
         <link rel="stylesheet" href="assets/back/css/styles.css"/>
+        <link rel="stylesheet" href="assets/back/css/agenda.css">
 
     </head>
     <body>
@@ -67,7 +68,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="backend/agendas/nueva-agenda">Crear Agenda</a></li>
                                     <li><a href="backend/agendas/actualizar">Actualizar agenda</a></li>
-                                    <li><a href="agenda.html">Ver Agenda Actual</a></li>
+                                    <li><a href="backend/agendas/ver-agenda">Ver Agenda Actual</a></li>
                                     <li><a href="backend/agendas/agregar-solicitudes">Agregar solicitudes</a></li>
                                 </ul>
                             </li>

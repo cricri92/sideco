@@ -146,6 +146,7 @@ class Request_model extends CI_Model
 
 	function getRequestById($request_id)
 	{
+		
 		$query = $this->db->get_where('request', array('id'=>$request_id));
 		return $query->row();
 	}

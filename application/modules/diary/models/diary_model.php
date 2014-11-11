@@ -91,6 +91,32 @@ class Diary_model extends CI_Model
 		$this->db->where('id', $diary_id);
 		$this->db->update('diary', $data);
 	}
+
+	function getDiaryDataById($diary_id)
+	{
+		$query = $this->db->get_where('diary',array('id' => $diary_id ));
+		return $query->row();
+	}
+
+	function getDiaryPointsById($diary_id)
+	{
+		$this->db->from('diary_points');	
+		$this->db->join('request', 'request.id = diary_points.request_id');
+		$this->db->group_by('request.type_request_id'); 
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getDiaryId()
+	{
+		$query = $this->db->get_where('diary',array('activated' => 1 ));
+		return $query->row()->id;
+	}
+	
+	function addRequestToDiary($diary_id, $request_id)
+	{
+		$this->db->insert('diary_points', array('diary_id' => $diary_id, 'request_id' => $request_id));
+	}
 }  
 
 ?>

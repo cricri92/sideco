@@ -315,6 +315,9 @@ class Request extends MX_Controller{
 				else
 				{
 					$data['status_id'] = 6;
+					$request_id = $this->input->post('request_id');
+					$diary_id = modules::run('diary/getDiaryId');
+					modules::run('diary/addRequestToDiary', $diary_id, $request_id);
 				}
 
  				$this->request_model->updateRequest($this->input->post('request_id'), $data);

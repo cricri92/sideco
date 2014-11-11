@@ -103,7 +103,15 @@ class Diary extends MX_Controller{
 	{
 		$query = $this->diary_model->getDiaryActive();
 		$query = SQL_to_array($query);
-		return $query;
+		$query['points'] = objectSQL_to_array($this->diary_model->getDiaryPointsById($query['id']));
+		foreach ($query['points'] as $key => $value) 
+		{
+			$query['points']	[$key]['type_request'] = modules::run('type_request/getNameByTypeRequestId', $query['points']	[$key]['type_request_id']);
+			$query['points']	[$key]['cedula'] = modules::run('applicant/getCedulaApplicantById', $query['points']	[$key]['applicant_id']);
+			$query['points']	[$key]['status'] =  modules::run('request/getStatusNameById',$query['points']	[$key]['status_id']);
+			$query['points']	[$key]['nombre'] = modules::run('applicant/getNombreApplicantById', $query['points']	[$key]['applicant_id']);
+		}
+		return $query; 
 	}
 
 	public function updateDiary()
@@ -235,10 +243,11 @@ class Diary extends MX_Controller{
 			{
 				$user_id = modules::run('user/getSessionId');
 				$data['userData'] = modules::run('user/getUserData', $user_id);
-				$data['title'] = 'Backend - Nueva agenda';
+				$data['title'] = 'Backend - Actualizar agenda';
 				$data['diary_type'] = $this->getDiaryType();
-				$data['diary_activated']	= $this->diary_model->diary_activated();
-				$data['contenido_principal'] = $this->load->view('nueva-agenda', $data, true);
+				$data['diary_activated'] = $this->getDiaryActived();
+				$data['diary'] = $this->getDiaryActived();
+				$data['contenido_principal'] = $this->load->view('actualizar-agenda', $data, true);
 				$this->load->view('back/template', $data);
 			}
 		}
@@ -246,5 +255,42 @@ class Diary extends MX_Controller{
 		{
 			redirect('backend');
 		}
+	}
+
+	//MOSTRAR UNA AGENDA
+	public function showDiary()
+	{
+		if(modules::run('user/isAdministrator'))
+		{
+			$user_id = modules::run('user/getSessionId');
+			$data['userData'] = modules::run('user/getUserData', $user_id);
+			$data['title'] = 'Backend - Agenda';
+			$data['diary'] = $this->getDiaryActived();
+			//die_pre($data);
+			$data['contenido_principal'] = $this->load->view('ver-agenda', $data, true);
+			$this->load->view('back/template', $data);
+
+		}
+		else
+		{
+			redirect('backend');
+		}
+	}
+
+	function getDiaryDataById($diary_id)
+	{
+		$query = $this->diary_model->getDiaryDataById($diary_id);
+		$query = objectSQL_to_array($query);
+		return $query;
+	}
+
+	public function getDiaryId()
+	{
+		return $this->diary_model->getDiaryId();
+	}
+
+	public function addRequestToDiary($diary_id, $request_id)
+	{
+		$this->diary_model->addRequestToDiary($diary_id, $request_id);
 	}
 }
