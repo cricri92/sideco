@@ -57,7 +57,6 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black">Solicitudes <span class="caret" ></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="backend/solicitudes/nueva-solicitud">Crear Solicitud</a></li>
-                                    <li><a href="solicitudes.html">Habilitar Solicitudes</a></li>
                                     <li><a href="backend/solicitudes">Revisar Solicitudes</a></li>
                                     <li><a href="backend/solicitudes/nuevo-tipo-solicitud">Nuevo tipo de solicitud</a></li>
                                 </ul>

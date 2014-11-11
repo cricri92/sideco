@@ -71,7 +71,6 @@ class Request extends MX_Controller{
 			        $name = $_FILES["attachment"]["name"][$key];
 			        $type = $_FILES["attachment"]["type"][$key];
 			        move_uploaded_file($tmp_name, "assets/back/upload/file/$name");
-			        echo $request_id." ".$name." ".$type;
 			        $this->newAttachment($request_id, $name, $type);
 			    }
 			    else
@@ -133,31 +132,30 @@ class Request extends MX_Controller{
 		if(!empty($_POST))
 		{
 
-			$this->form_validation->set_rules('cedula','Cedula','required|callback_existCedula');
-			$this->form_validation->set_rules('nombre','Nombre','required|callback_existNombre');
-			$this->form_validation->set_rules('type_request_id','Tipo de Solicitud', 'required');
-			$this->form_validation->set_rules('description', 'Descripción', 'required');
-			$this->form_validation->set_rules('status_id','Estatus','required');
 			$this->form_validation->set_rules('type_applicant_id','Tipo solicitante','required');
 			$this->form_validation->set_rules('dependence_id','Dependencia','required');
+			$this->form_validation->set_rules('status_id','Estatus','required');
+			$this->form_validation->set_rules('cedula','Cedula','required|callback_existCedula');
+			$this->form_validation->set_rules('type_request_id','Tipo de Solicitud', 'required');
+			$this->form_validation->set_rules('description', 'Descripción', 'required');
 
 			$this->form_validation->set_message('required', '%s es requerido.');
 			$this->form_validation->set_message('existCedula', '%s no existe.');
-			$this->form_validation->set_message('existNombre', '%s no existe.');
 
 			if($this->form_validation->run($this))
-			{
+			{	
+				//OBTENGO EL ID DE UN USUARIO A PARTIR DE SU CEDULA
 				$aux = modules::run('applicant/getApplicantIdByCedula',$this->input->post('cedula'));
-				$user_id = $aux['id'];
-				
+				$user_id = $aux->id;
+				//ORGANIZAMOS LA DATA DE LA NUEVA SOLICITUD
 				$request = array(
-					'applicant_id'		=> $user_id, 
+					'type_applicant_id' => $this->input->post('type_applicant_id'),
+					'dependence_id'		=> $this->input->post('dependence_id'),
 					'status_id' 		=> $this->input->post('status_id'),
+					'applicant_id'		=> $user_id, 
 					'type_request_id' 	=> $this->input->post('type_request_id'),
 					'description' 		=> $this->input->post('description'),
-					'date' 				=> date("Y-m-d"),
-					'type_applicant_id' => $this->input->post('type_applicant_id'),
-					'dependence_id'		=> $this->input->post('dependence_id')
+					'date' 				=> date("Y-m-d")
 				);
 				
 				$this->request_model->createRequest($request);

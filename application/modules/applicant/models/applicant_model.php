@@ -114,6 +114,13 @@ class Applicant_model extends CI_Model
 		return $query->row();
 	}
 
+	//DADA UNA CEDULA OBTENGO LOS DATOS DEL SOLICITANTE
+	function getApplicantDataByCedula($cedula)
+	{
+		$query = $this->db->get_where('applicant', array('cedula'=>$cedula));
+		return $query->row();
+	}
+
 }  
 
 ?>

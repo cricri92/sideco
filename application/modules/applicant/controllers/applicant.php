@@ -289,4 +289,14 @@ class Applicant extends MX_Controller
 		$query = SQL_to_array($query);
 		return $query['name'];
 	}
+
+	public function ajax_getApplicantData()
+	{
+		$cedula = $_POST['cedula'];
+		$query = $this->applicant_model->getApplicantDataByCedula($cedula);
+		$query = SQL_to_array($query);
+
+		header('Content-Type:application/json');
+		echo json_encode($query);
+	}
 }

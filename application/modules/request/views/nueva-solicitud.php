@@ -28,15 +28,16 @@
 			  		</div>
 					<input type="hidden" name="status_id" value="5">
 					<div class="form-group">
-						<label for="exampleInputEmail1" class="control-label">Nombre</label>
-						<input class="form-control" name="nombre">
-						<?php echo form_error('nombre') ?>
-					</div>
-					<div class="form-group">
 				    	<label class="control-label" for="exampleInputEmail1">Cedula</label>
-				    	<input class="form-control" name="cedula">
+				    	<input id="cedula" class="form-control" name="cedula">
+				    	<p id="error_cedula" style="display:none" class="text-danger"></p>
 				    	<?php echo form_error('cedula'); ?>
 				  	</div>
+					<div class="form-group">
+						<label for="exampleInputEmail1" class="control-label">Nombre</label>
+						<input id="nombre" type="text" class="form-control" name="nombre" disabled>
+						<?php echo form_error('nombre') ?>
+					</div>
 					<div class="form-group">
 				    	<label for="exampleInputPassword1">Tipo de solicitud</label>
 			    		<select class="form-control" name="type_request_id">

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-11-2014 a las 23:53:15
+-- Tiempo de generación: 11-11-2014 a las 03:38:02
 -- Versión del servidor: 5.6.20
 -- Versión de PHP: 5.5.15
 
@@ -35,18 +35,18 @@ CREATE TABLE IF NOT EXISTS `applicant` (
   `slug` varchar(255) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Volcado de datos para la tabla `applicant`
 --
 
 INSERT INTO `applicant` (`id`, `name`, `cedula`, `email`, `password`, `slug`, `create_at`, `update_at`) VALUES
-(1, 'Kiara Ottogalli', '1234456', 'kottogalli@sideco.com', '5ae955fb17babdbb07a3c3ff012dd7c8850af77f', 'kiara-ottogalli', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (2, 'Antonio Castañeda', '9483823', 'castaneda@redesfacyt.com', '8cb2237d0679ca88db6464eac60da96345513964', 'antonio-castaneda', '2014-11-06 20:12:16', '2014-11-06 20:12:16'),
 (5, 'María Fátima de Abreu', '23456', 'mfdabreu@sideco.com', 'c24d0a1968e339c3786751ab16411c2c24ce8a2e', 'maria-fatima-de-abreu', '2014-11-08 14:18:50', '2014-11-08 14:18:50'),
 (8, 'Elsa Tovar', '45678', 'etovar@sideco.com', '3b4f3367054b005bf971f96026b4a55003189565', 'elsa-tovar', '2014-11-08 14:22:38', '2014-11-08 14:22:38'),
-(10, 'Amadis Martinez', '897456', 'amartinez@sideco.com', '', 'amadis-martinez', '2014-11-08 16:25:54', '2014-11-08 16:25:54');
+(10, 'Amadis Martinez', '897456', 'amartinez@sideco.com', '', 'amadis-martinez', '2014-11-08 16:25:54', '2014-11-08 16:25:54'),
+(11, 'Salomon Ruiz', '123456789', 'sruiz@gmail.com', '786bd9a52ee9af08db5c139b86cc60533ca1c7b6', 'salomon-ruiz', '2014-11-11 01:05:01', '2014-11-11 01:05:01');
 
 -- --------------------------------------------------------
 
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `dependence` (
 --
 
 INSERT INTO `dependence` (`id`, `name`, `subject_id`, `slug`, `create_at`, `update_at`) VALUES
-(1, 'Preparadores', 0, 'preparadores', '2014-11-08 19:07:33', '2014-11-08 19:07:33'),
+(1, 'Preparadores', 0, 'preparadores', '2014-11-08 19:07:33', '2014-11-11 00:24:12'),
 (2, 'Pasantías', 0, 'pasantias', '2014-11-08 19:07:53', '2014-11-08 19:07:53'),
 (3, 'Ninguna', 0, 'ninguna', '2014-11-08 19:11:05', '2014-11-08 19:11:05');
 
@@ -214,14 +214,15 @@ CREATE TABLE IF NOT EXISTS `request` (
   `description` text NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
 
 --
 -- Volcado de datos para la tabla `request`
 --
 
 INSERT INTO `request` (`id`, `type_request_id`, `type_applicant_id`, `dependence_id`, `date`, `status_id`, `applicant_id`, `description`, `create_at`, `update_at`) VALUES
-(43, 1, 1, 3, '2014-11-08', 6, 10, 'Permiso de Ana Aguilera', '2014-11-08 20:55:09', '2014-11-09 07:09:47');
+(43, 1, 1, 3, '2014-11-08', 6, 10, 'Permiso de Ana Aguilera', '2014-11-08 20:55:09', '2014-11-09 07:09:47'),
+(46, 2, 1, 3, '2014-11-11', 5, 2, 'dasdsad', '2014-11-11 02:35:41', '2014-11-11 02:35:41');
 
 -- --------------------------------------------------------
 
@@ -236,7 +237,14 @@ CREATE TABLE IF NOT EXISTS `request_attachment` (
   `type` varchar(255) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `request_attachment`
+--
+
+INSERT INTO `request_attachment` (`id`, `request_id`, `name`, `type`, `create_at`, `update_at`) VALUES
+(1, 46, 'Documento ERS 1.1.pdf', 'application/pdf', '2014-11-11 02:35:42', '2014-11-11 02:35:42');
 
 -- --------------------------------------------------------
 
@@ -431,7 +439,7 @@ ALTER TABLE `privilege`
 -- Indices de la tabla `request`
 --
 ALTER TABLE `request`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `type_applicant_id` (`type_applicant_id`), ADD UNIQUE KEY `dependence_id` (`dependence_id`), ADD KEY `type_request_id` (`type_request_id`), ADD KEY `status_id` (`status_id`), ADD KEY `user_id` (`applicant_id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `type_request_id` (`type_request_id`), ADD KEY `status_id` (`status_id`), ADD KEY `user_id` (`applicant_id`), ADD KEY `type_applicant_id` (`type_applicant_id`), ADD KEY `dependence_id` (`dependence_id`);
 
 --
 -- Indices de la tabla `request_attachment`
@@ -483,7 +491,7 @@ ALTER TABLE `userback`
 -- AUTO_INCREMENT de la tabla `applicant`
 --
 ALTER TABLE `applicant`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `counselor`
 --
@@ -523,12 +531,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT de la tabla `request`
 --
 ALTER TABLE `request`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT de la tabla `request_attachment`
 --
 ALTER TABLE `request_attachment`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `semester`
 --

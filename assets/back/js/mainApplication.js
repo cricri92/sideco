@@ -47,6 +47,23 @@ $(function () {
             $('#dependence_id').val(1); 
         }
     });
+
+    $('#cedula').focusout(function(){
+        var cedula = $(this).val();
+        $.post('applicant/ajax_getApplicantData', {cedula:cedula}, function(data, status){
+            $('#error_cedula').fadeOut();
+            if($.isEmptyObject(data))
+            {
+                $('#error_cedula').fadeIn().html("Cedula no registrada.");
+                $('#nombre').fadeIn().val('');
+            }
+            else
+            {
+                $('#error_cedula').fadeOut();
+                $('#nombre').fadeIn().val(data.name);
+            }
+        });
+    });
 /*
     $("#date_picker").click(function(){
         var id = $(this).val("id");
