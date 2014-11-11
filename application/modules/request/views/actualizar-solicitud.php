@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="col-md-6">
+	<div class="col-md-8">
 		<div class="panel panel-primary">
 		   	<div class="panel-heading">
 		  		<h3 class="panel-title">Actualizar solicitud</h3>
@@ -69,9 +69,9 @@
 				    	<label for="exampleInputEmail1">Descripción</label>
 				    	<br>
 				    	<?php if(!empty(set_value('description'))): ?>
-				    		<textarea class="form-control" name="description"><?php echo set_value('description'); ?></textarea>
+				    		<textarea class="ckeditor" name="description"><?php echo set_value('description'); ?></textarea>
 				    	<?php else: ?>
-				    		<textarea class="form-control" name="description"><?php echo $request['description']; ?></textarea>
+				    		<textarea class="ckeditor" name="description"><?php echo $request['description']; ?></textarea>
 				    	<?php endif; ?>
 				    	<?php echo form_error('description'); ?>
 				  	</div>
