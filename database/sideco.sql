@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 11-11-2014 a las 10:41:05
+-- Tiempo de generación: 11-11-2014 a las 18:25:53
 -- Versión del servidor: 5.6.20
 -- Versión de PHP: 5.5.15
 
@@ -171,12 +171,20 @@ CREATE TABLE IF NOT EXISTS `diary_attachment` (
 --
 
 CREATE TABLE IF NOT EXISTS `diary_points` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `diary_id` int(11) NOT NULL,
   `request_id` int(11) NOT NULL,
-  `create_at` int(11) NOT NULL,
-  `update_at` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `diary_points`
+--
+
+INSERT INTO `diary_points` (`id`, `diary_id`, `request_id`, `create_at`, `update_at`) VALUES
+(1, 8, 48, '2014-11-11 14:31:23', '2014-11-11 14:31:23'),
+(2, 8, 50, '2014-11-11 15:52:27', '2014-11-11 15:52:27');
 
 -- --------------------------------------------------------
 
@@ -189,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `diary_type` (
   `name` varchar(255) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_a` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `diary_type`
@@ -235,17 +243,19 @@ CREATE TABLE IF NOT EXISTS `request` (
   `status_id` int(11) NOT NULL,
   `applicant_id` int(11) NOT NULL,
   `description` text NOT NULL,
+  `resolution` varchar(255) DEFAULT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
 
 --
 -- Volcado de datos para la tabla `request`
 --
 
-INSERT INTO `request` (`id`, `type_request_id`, `type_applicant_id`, `dependence_id`, `date`, `status_id`, `applicant_id`, `description`, `create_at`, `update_at`) VALUES
-(48, 5, 3, 1, '2014-11-11', 6, 12, 'Esta es una solicitud de Pasantias 2', '2014-11-11 04:27:10', '2014-11-11 06:38:06'),
-(49, 5, 2, 2, '2014-11-11', 5, 13, '<p>Hola, soy una descripcion</p>\n', '2014-11-11 06:52:37', '2014-11-11 06:52:37');
+INSERT INTO `request` (`id`, `type_request_id`, `type_applicant_id`, `dependence_id`, `date`, `status_id`, `applicant_id`, `description`, `resolution`, `create_at`, `update_at`) VALUES
+(48, 5, 3, 1, '2014-11-11', 6, 12, 'Esta es una solicitud de Pasantias 2', NULL, '2014-11-11 04:27:10', '2014-11-11 06:38:06'),
+(49, 5, 2, 2, '2014-11-11', 5, 13, '<p>Hola, soy una descripcion</p>\n', NULL, '2014-11-11 06:52:37', '2014-11-11 06:52:37'),
+(50, 6, 1, 1, '2014-11-11', 6, 13, '<p>Comunicado Nro. DC-103-2012, de fecha 26/01/2012, recibida en esta Secretaria el 27/01/2012, emitido por el&nbsp;<strong>Prof. Amad&iacute;s Martinez - Director (E), informando que esta direccion le otorgo un permiso a la Prof. Ana Aguilera, por razones personales.</strong></p>\n', NULL, '2014-11-11 15:51:56', '2014-11-11 15:52:28');
 
 -- --------------------------------------------------------
 
@@ -445,6 +455,12 @@ ALTER TABLE `diary_attachment`
  ADD PRIMARY KEY (`id`), ADD KEY `request_id` (`request_id`);
 
 --
+-- Indices de la tabla `diary_points`
+--
+ALTER TABLE `diary_points`
+ ADD PRIMARY KEY (`id`), ADD KEY `diary_id` (`diary_id`), ADD KEY `request_id` (`request_id`);
+
+--
 -- Indices de la tabla `diary_type`
 --
 ALTER TABLE `diary_type`
@@ -539,10 +555,15 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 ALTER TABLE `diary_attachment`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `diary_points`
+--
+ALTER TABLE `diary_points`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT de la tabla `diary_type`
 --
 ALTER TABLE `diary_type`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `privilege`
 --
@@ -552,7 +573,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT de la tabla `request`
 --
 ALTER TABLE `request`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT de la tabla `request_attachment`
 --
@@ -609,6 +630,13 @@ ADD CONSTRAINT `diary_ibfk_1` FOREIGN KEY (`diary_type_id`) REFERENCES `diary_ty
 --
 ALTER TABLE `diary_attachment`
 ADD CONSTRAINT `diary_attachment_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `diary_points`
+--
+ALTER TABLE `diary_points`
+ADD CONSTRAINT `diary_points_ibfk_1` FOREIGN KEY (`diary_id`) REFERENCES `diary` (`id`) ON DELETE CASCADE,
+ADD CONSTRAINT `diary_points_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `request`
