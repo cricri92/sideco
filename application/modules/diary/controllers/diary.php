@@ -16,7 +16,8 @@ class Diary extends MX_Controller{
 			$user_id = modules::run('user/getSessionId');
 			$data['userData'] = modules::run('user/getUserData', $user_id);
 			$data['title'] = 'Backend - Nueva agenda';
-			$data['meeting_type'] = $this->getDiaryType();
+			$data['diary_type'] = $this->getDiaryType();
+			$data['diary_activated']	= $this->diary_model->diary_activated();
 			$data['contenido_principal'] = $this->load->view('nueva-agenda', $data, true);
 			$this->load->view('back/template', $data);
 		}
@@ -31,21 +32,29 @@ class Diary extends MX_Controller{
 		return $this->diary_model->noExistDiaryNumber($num_acta);
 	}
 
+	//OBTENGO LOS TIPOS DE AGENDA
 	function getDiaryType()
 	{
 		$query = $this->diary_model->getDiaryType();
 		$query = objectSQL_to_array($query);
 		return $query;
+	}	
+
+
+	//DESCATIVA LA AGENDA ACTUAL
+	function desactivateCurrentDiary()
+	{
+		return $this->diary_model->desactivateCurrentDiary();
 	}
 
+	//CREA UNA AGENDA
 	public function createDiary()
 	{
 		if(!empty($_POST))
 		{
-			$this->form_validation->set_rules('num_acta','Numero de acta','required|trim|callback_noExistDiaryNumber');
 			$this->form_validation->set_rules('date', 'Fecha', 'required');
-			$this->form_validation->set_rules('consideration','Consideracion','required');
-			$this->form_validation->set_rules('meeting_type_id','Tipo de Reunion','required');
+			$this->form_validation->set_rules('num_acta','Numero de acta','required|trim|callback_noExistDiaryNumber');
+			$this->form_validation->set_rules('diary_type_id','Tipo de Reunion','required');
 
 			$this->form_validation->set_message('required', '%s es requerido.');
 			$this->form_validation->set_message('noExistDiaryNumber', '%s existe');
@@ -53,23 +62,26 @@ class Diary extends MX_Controller{
 			if($this->form_validation->run($this))
 			{
 				$data = array(
+					'date'		=> $this->input->post('date'),
+					'activated'	=> 1,
 					'num_acta' 	=> $this->input->post('num_acta'),
-					'date'		=> date('Y-m-d'),
-					'consideration' => $this->input->post('consideration'),
-					'diary_type_id' => $this->input->post('meeting_type_id')
+					'diary_type_id' => $this->input->post('diary_type_id')
 				);
 
+				$this->diary_model->desactivateCurrentDiary();
+
 				$this->diary_model->insertDiary($data);
+
 
 				redirect('backend');
 			}
 			else
 			{
-				die_pre(validation_errors());
 				$user_id = modules::run('user/getSessionId');
 				$data['userData'] = modules::run('user/getUserData', $user_id);
 				$data['title'] = 'Backend - Nueva agenda';
-				$data['createDiary'] = $this->getDiaryType();
+				$data['diary_type'] = $this->getDiaryType();
+				$data['diary_activated']	= $this->diary_model->diary_activated();
 				$data['contenido_principal'] = $this->load->view('nueva-agenda', $data, true);
 				$this->load->view('back/template', $data);
 			}
@@ -77,6 +89,39 @@ class Diary extends MX_Controller{
 		else
 		{
 			redirect('redirect');
+		}
+	}
+
+
+	//VERIFICA QUE EXISTA UNA AGENDA POR ID
+	public function existDiaryById($diary_id)
+	{
+		return $this->diary_model->existDiaryById($diary_id);
+	}
+
+	public function getDiaryActived()
+	{
+		$query = $this->diary_model->getDiaryActive();
+		$query = SQL_to_array($query);
+		return $query;
+	}
+
+	public function updateDiary()
+	{
+		if(modules::run('user/isAdministrator'))
+		{
+			$user_id = modules::run('user/getSessionId');
+			$data['userData'] = modules::run('user/getUserData', $user_id);
+			$data['title'] = 'Backend - Actualizar agenda';
+			$data['diary_type'] = $this->getDiaryType();
+			$data['diary_activated'] = $this->getDiaryActived();
+			$data['diary'] = $this->getDiaryActived();
+			$data['contenido_principal'] = $this->load->view('actualizar-agenda', $data, true);
+			$this->load->view('back/template', $data);
+		}
+		else
+		{
+			redirect('backend');
 		}
 	}
 
@@ -151,10 +196,55 @@ class Diary extends MX_Controller{
 					}
 				}
 			}
-			
-
-		 
 		}
 			redirect('backend');
+	}
+
+	function isNotDuplicatedDiaryNumber($diary_number)
+	{
+		return $this->diary_model->isNotDuplicatedDiaryNumber($diary_number);
+	}
+
+	public function diaryUpdate()
+	{
+		if(!empty($_POST))
+		{
+			$this->form_validation->set_rules('date', 'Fecha', 'required');
+			$this->form_validation->set_rules('num_acta','Numero de acta','required|trim|callback_isNotDuplicatedDiaryNumber');
+			$this->form_validation->set_rules('diary_type_id','Tipo de Reunion','required');
+
+			$this->form_validation->set_message('required', '%s es requerido.');
+			$this->form_validation->set_message('noExistDiaryNumber', '%s existe');
+
+			if($this->form_validation->run($this))
+			{
+				$data = array(
+					'date'		=> $this->input->post('date'),
+					'num_acta' 	=> $this->input->post('num_acta'),
+					'diary_type_id' => $this->input->post('diary_type_id')
+				);
+
+				$diary_id = $this->input->post('diary_id');
+
+				$this->diary_model->updateDiary($diary_id, $data);
+
+
+				redirect('backend');
+			}
+			else
+			{
+				$user_id = modules::run('user/getSessionId');
+				$data['userData'] = modules::run('user/getUserData', $user_id);
+				$data['title'] = 'Backend - Nueva agenda';
+				$data['diary_type'] = $this->getDiaryType();
+				$data['diary_activated']	= $this->diary_model->diary_activated();
+				$data['contenido_principal'] = $this->load->view('nueva-agenda', $data, true);
+				$this->load->view('back/template', $data);
+			}
+		}
+		else
+		{
+			redirect('backend');
+		}
 	}
 }

@@ -90,6 +90,8 @@ $route['backend/agendas/nueva-agenda']						= 'diary/newDiary';
 $route['backend/agendas/crear-agenda']						= 'diary/createDiary';
 $route['backend/agendas/agregar-solicitudes']				= 'diary/addRequests';
 $route['backend/agendas/agregar-solicitud']					= 'diary/addRequest';
+$route['backend/agendas/actualizar']						= 'diary/updateDiary';
+$route['backend/agendas/actualizar-agenda']					= 'diary/diaryUpdate';
 
 //DEPENDENCIAS
 $route['backend/dependencias/nueva-dependencia']			= 'dependence/newDependence';

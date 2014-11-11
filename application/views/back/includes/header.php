@@ -66,6 +66,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black">Agenda<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="backend/agendas/nueva-agenda">Crear Agenda</a></li>
+                                    <li><a href="backend/agendas/actualizar">Actualizar agenda</a></li>
                                     <li><a href="agenda.html">Ver Agenda Actual</a></li>
                                     <li><a href="backend/agendas/agregar-solicitudes">Agregar solicitudes</a></li>
                                 </ul>

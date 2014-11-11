@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 11-11-2014 a las 03:38:02
+-- Tiempo de generación: 11-11-2014 a las 10:41:05
 -- Versión del servidor: 5.6.20
 -- Versión de PHP: 5.5.15
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `applicant` (
   `slug` varchar(255) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Volcado de datos para la tabla `applicant`
@@ -46,7 +46,9 @@ INSERT INTO `applicant` (`id`, `name`, `cedula`, `email`, `password`, `slug`, `c
 (5, 'María Fátima de Abreu', '23456', 'mfdabreu@sideco.com', 'c24d0a1968e339c3786751ab16411c2c24ce8a2e', 'maria-fatima-de-abreu', '2014-11-08 14:18:50', '2014-11-08 14:18:50'),
 (8, 'Elsa Tovar', '45678', 'etovar@sideco.com', '3b4f3367054b005bf971f96026b4a55003189565', 'elsa-tovar', '2014-11-08 14:22:38', '2014-11-08 14:22:38'),
 (10, 'Amadis Martinez', '897456', 'amartinez@sideco.com', '', 'amadis-martinez', '2014-11-08 16:25:54', '2014-11-08 16:25:54'),
-(11, 'Salomon Ruiz', '123456789', 'sruiz@gmail.com', '786bd9a52ee9af08db5c139b86cc60533ca1c7b6', 'salomon-ruiz', '2014-11-11 01:05:01', '2014-11-11 01:05:01');
+(11, 'Salomon Ruiz', '123456789', 'sruiz@gmail.com', '786bd9a52ee9af08db5c139b86cc60533ca1c7b6', 'salomon-ruiz', '2014-11-11 01:05:01', '2014-11-11 01:05:01'),
+(12, 'Oriana Ruiz', '21032766', 'oruiz@sideco.com', '4b0b99aa78b19bf81811b104f22caa63bae621c0', 'oriana-ruiz', '2014-11-11 04:25:45', '2014-11-11 04:25:45'),
+(13, 'Hector Flores', '20162504', 'hecto932@gmail.com', '786bd9a52ee9af08db5c139b86cc60533ca1c7b6', 'hector-flores', '2014-11-11 06:52:16', '2014-11-11 06:52:16');
 
 -- --------------------------------------------------------
 
@@ -131,16 +133,23 @@ CREATE TABLE IF NOT EXISTS `diary` (
   `num_acta` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `consideration` varchar(255) DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  `activated` int(11) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `diary`
 --
 
-INSERT INTO `diary` (`id`, `diary_type_id`, `num_acta`, `date`, `consideration`, `create_at`, `update_at`) VALUES
-(2, 1, '8h8h978', '2014-11-10', 'g7gyiu', '2014-11-10 22:50:35', '2014-11-10 22:50:35');
+INSERT INTO `diary` (`id`, `diary_type_id`, `num_acta`, `date`, `consideration`, `comment`, `activated`, `create_at`, `update_at`) VALUES
+(2, 1, '8h8h978', '2014-11-10', 'g7gyiu', NULL, 0, '2014-11-10 22:50:35', '2014-11-10 22:50:35'),
+(4, 1, 'N-002-2001', '2014-11-11', NULL, NULL, 0, '2014-11-11 08:23:01', '2014-11-11 08:36:33'),
+(5, 1, 'asdadsd', '2014-11-14', NULL, NULL, 0, '2014-11-11 08:31:36', '2014-11-11 08:39:47'),
+(6, 2, '48486', '2014-11-12', NULL, NULL, 0, '2014-11-11 08:39:23', '2014-11-11 08:40:23'),
+(7, 2, 'sadsadsad', '2014-11-11', NULL, NULL, 0, '2014-11-11 08:40:23', '2014-11-11 08:41:01'),
+(8, 1, 'sadsadasdsad232323', '2014-11-23', NULL, NULL, 1, '2014-11-11 08:41:01', '2014-11-11 09:40:36');
 
 -- --------------------------------------------------------
 
@@ -154,6 +163,20 @@ CREATE TABLE IF NOT EXISTS `diary_attachment` (
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `diary_points`
+--
+
+CREATE TABLE IF NOT EXISTS `diary_points` (
+  `id` int(11) NOT NULL,
+  `diary_id` int(11) NOT NULL,
+  `request_id` int(11) NOT NULL,
+  `create_at` int(11) NOT NULL,
+  `update_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -214,15 +237,15 @@ CREATE TABLE IF NOT EXISTS `request` (
   `description` text NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
 
 --
 -- Volcado de datos para la tabla `request`
 --
 
 INSERT INTO `request` (`id`, `type_request_id`, `type_applicant_id`, `dependence_id`, `date`, `status_id`, `applicant_id`, `description`, `create_at`, `update_at`) VALUES
-(43, 1, 1, 3, '2014-11-08', 6, 10, 'Permiso de Ana Aguilera', '2014-11-08 20:55:09', '2014-11-09 07:09:47'),
-(46, 2, 1, 3, '2014-11-11', 5, 2, 'dasdsad', '2014-11-11 02:35:41', '2014-11-11 02:35:41');
+(48, 5, 3, 1, '2014-11-11', 6, 12, 'Esta es una solicitud de Pasantias 2', '2014-11-11 04:27:10', '2014-11-11 06:38:06'),
+(49, 5, 2, 2, '2014-11-11', 5, 13, '<p>Hola, soy una descripcion</p>\n', '2014-11-11 06:52:37', '2014-11-11 06:52:37');
 
 -- --------------------------------------------------------
 
@@ -237,14 +260,14 @@ CREATE TABLE IF NOT EXISTS `request_attachment` (
   `type` varchar(255) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `request_attachment`
 --
 
 INSERT INTO `request_attachment` (`id`, `request_id`, `name`, `type`, `create_at`, `update_at`) VALUES
-(1, 46, 'Documento ERS 1.1.pdf', 'application/pdf', '2014-11-11 02:35:42', '2014-11-11 02:35:42');
+(2, 48, 'Documento ERS 1.1.pdf', 'application/pdf', '2014-11-11 04:27:10', '2014-11-11 04:27:10');
 
 -- --------------------------------------------------------
 
@@ -346,8 +369,6 @@ CREATE TABLE IF NOT EXISTS `type_request` (
 --
 
 INSERT INTO `type_request` (`id`, `name`, `slug`, `create_at`, `update_at`) VALUES
-(1, 'Asuntos profesorales', 'asuntos-profesorales', '2014-11-02 20:18:10', '2014-11-02 20:19:03'),
-(2, 'Asuntos estudiantiles', 'asuntos-estudiantiles', '2014-11-02 20:41:34', '2014-11-02 20:41:34'),
 (5, 'Coordinacion de Pasantias', 'coordinacion-de-pasantias', '2014-11-08 12:45:37', '2014-11-08 12:45:37'),
 (6, 'Coordinacion de Preparadores', 'coordinacion-de-preparadores', '2014-11-08 12:45:59', '2014-11-08 12:45:59');
 
@@ -415,7 +436,7 @@ ALTER TABLE `dependence`
 -- Indices de la tabla `diary`
 --
 ALTER TABLE `diary`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `diary_type_id` (`diary_type_id`), ADD KEY `diary_type_id_2` (`diary_type_id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `diary_type_id` (`diary_type_id`);
 
 --
 -- Indices de la tabla `diary_attachment`
@@ -491,7 +512,7 @@ ALTER TABLE `userback`
 -- AUTO_INCREMENT de la tabla `applicant`
 --
 ALTER TABLE `applicant`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `counselor`
 --
@@ -511,7 +532,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT de la tabla `diary`
 --
 ALTER TABLE `diary`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `diary_attachment`
 --
@@ -531,12 +552,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT de la tabla `request`
 --
 ALTER TABLE `request`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT de la tabla `request_attachment`
 --
 ALTER TABLE `request_attachment`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `semester`
 --
