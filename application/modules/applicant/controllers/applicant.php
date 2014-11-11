@@ -66,11 +66,12 @@ class Applicant extends MX_Controller
 			if($this->form_validation->run($this))
 			{
 				$data = array(
-					'name' => $this->input->post('name'),
-					'email' => $this->input->post('email'),
-					'cedula' => $this->input->post('cedula'),
-					'slug' => modules::run('operations/createSlug', $this->input->post('name'))
-				);
+					'name' 		=> $this->input->post('name'),
+					'email' 	=> $this->input->post('email'),
+					'cedula' 	=> $this->input->post('cedula'),
+					'slug' 		=> modules::run('operations/createSlug', $this->input->post('name')),
+					'password' 	=> sha1($this->input->post('password'))
+ 				);
 
 				$this->applicant_model->insertApplicant($data);
 
@@ -180,11 +181,9 @@ class Applicant extends MX_Controller
 
 	//ACTUALIZA UN SOLICITANTE
 	public function applicantUpdate()
-	{
+	{	
 		if(!empty($_POST))
 		{
-			$this->form_validation->set_rules('type_applicant_id','Tipo de solicitante', 'required');
-			$this->form_validation->set_rules('dependence_id','Dependencia','required');
 			$this->form_validation->set_rules('name', 'Nombre', 'required|trim');
 			$this->form_validation->set_rules('cedula', 'Cedula', 'required|callback_isNotDupplicateCedula');
 			$this->form_validation->set_rules('email', 'Correo electrónico','required|callback_isNotDupplicateEmail');
@@ -203,19 +202,22 @@ class Applicant extends MX_Controller
 			if($this->form_validation->run($this))
 			{
 				$data = array(
-					'type_applicant_id' => $this->input->post('applicant_id'),
-					'dependence_id'	=> $this->input->post('dependence_id'),
-					'name' => $this->input->post('name'),
-					'cedula' => $this->input->post('cedula'),
-					'email' => $this->input->post('email'),
-					'slug' => modules::run('operations/createSlug', $this->input->post('name'))
+					'name' 				=> $this->input->post('name'),
+					'cedula' 			=> $this->input->post('cedula'),
+					'email' 			=> $this->input->post('email'),
+					'slug'	 			=> modules::run('operations/createSlug', $this->input->post('name'))
 				);
+
+				if(!empty($this->input->post('password')))
+				{
+					$data['password'] = sha1($this->input->post('password'));
+				}
 
 				$applicant_id = $this->input->post('applicant_id');
 
 				$this->applicant_model->updateApplicant($applicant_id, $data);
 
-				redirect('backend/solicitudes');
+				redirect('backend/solicitantes');
 			}
 			else
 			{
@@ -224,7 +226,8 @@ class Applicant extends MX_Controller
 				$data['title'] = 'Backend - Actualizar solicitante';
 				$data['typeApplicant'] = $this->getApplicantType();
 				$data['dependences'] = modules::run('dependence/getAllDependences');
-				$data['applicant'] = $this->getApplicantBySlug($slug);
+				$data['applicant'] = $this->getApplicantbyId($this->input->post('applicant_id'));
+				die_pre($data);
 				$data['contenido_principal'] = $this->load->view('actualizar-solicitante',$data, true);
 				$this->load->view('back/template', $data);
 			}
