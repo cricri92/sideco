@@ -65,11 +65,6 @@ class Request_model extends CI_Model
 		return $query->row();
 	}
 
-	function updateRequest($request_id, $data)
-	{
-		$this->db->where('id',$request_id);
-		$this->db->update('request', $data);
-	}
 
 	//OBTENGO LAS SOLICITUDES POR STATUS_ID
 	function getRequestByStatusId($status_id)
@@ -153,6 +148,12 @@ class Request_model extends CI_Model
 	{
 		$query = $this->db->get_where('request', array('id'=>$request_id));
 		return $query->row();
+	}
+
+	function updateRequest($request_id, $data)
+	{
+		$this->db->where('id', $request_id);
+		$this->db->update('request', $data);
 	}
 	
 }  

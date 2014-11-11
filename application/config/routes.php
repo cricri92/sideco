@@ -82,6 +82,8 @@ $route['backend/solicitudes/veredicto/(.*)']				= 'request/changeVeredict/$1';
 $route['backend/solicitudes/dar-veredicto']					= 'request/veredict';
 $route['backend/solicitudes/eliminar/(.*)']					= 'request/deleteRequest/$1';
 $route['backend/solicitudes/eliminar-solicitud/(.*)']		= 'request/requestDelete/$1';			
+$route['backend/solicitudes/actualizar/(.*)']				= 'request/updateRequest/$1';
+$route['backend/solicitudes/actualizar-solicitud']			= 'request/requestUpdate';
 
 //AGENDA
 $route['backend/agendas/nueva-agenda']						= 'diary/newDiary';
