@@ -532,5 +532,24 @@ class Request extends MX_Controller{
 			redirect('backend');
 		}
 	}
+	
+	public function getRequestByTypeRequest()
+	{	
+		//OBTENGO TODOS LOS TIPOS DE SOLICITUD
+		$typeRequests = $this->request_model->getAllTypeRequests();
+		$typeRequests = objectSQL_to_array($typeRequests);
+
+		$i = 0;
+		$query = array();
+		foreach ($typeRequests as $key => $value) 
+		{
+			$aux['type_request_id'] = $value['id'];
+			$aux['type_request'] = modules::run('type_request/getNameByTypeRequestId', $value['id']);
+			$aux['requests'] = objectSQL_to_array($this->request_model->getAllRequestsByTypeRequestId($value['id']));
+			$query[$i++] = $aux;
+ 		}
+
+ 		return $query;
+	}
 
 }

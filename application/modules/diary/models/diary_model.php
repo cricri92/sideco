@@ -117,6 +117,12 @@ class Diary_model extends CI_Model
 	{
 		$this->db->insert('diary_points', array('diary_id' => $diary_id, 'request_id' => $request_id));
 	}
+
+	function getNameDiaryTypeById($diary_type_id)
+	{
+		$query = $this->db->get_where('diary_type',array('id' => $diary_type_id));
+		return $query->row()->name;
+	}
 }  
 
 ?>

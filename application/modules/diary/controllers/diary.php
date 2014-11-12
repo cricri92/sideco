@@ -7,6 +7,7 @@ class Diary extends MX_Controller{
 	{
 		parent::__construct();
 		$this->load->model('diary_model');
+		$this->load->library('mpdf');
 	}
 
 	public function newDiary()
@@ -103,13 +104,18 @@ class Diary extends MX_Controller{
 	{
 		$query = $this->diary_model->getDiaryActive();
 		$query = SQL_to_array($query);
-		$query['points'] = objectSQL_to_array($this->diary_model->getDiaryPointsById($query['id']));
+		$query['diary_type'] = $this->diary_model->getNameDiaryTypeById($query['diary_type_id']);
+		$query['type_requests'] = modules::run('request/getRequestByTypeRequest');  
+		$query['points'] = modules::run('request/getRequestByTypeRequest');
 		foreach ($query['points'] as $key => $value) 
 		{
-			$query['points']	[$key]['type_request'] = modules::run('type_request/getNameByTypeRequestId', $query['points']	[$key]['type_request_id']);
-			$query['points']	[$key]['cedula'] = modules::run('applicant/getCedulaApplicantById', $query['points']	[$key]['applicant_id']);
-			$query['points']	[$key]['status'] =  modules::run('request/getStatusNameById',$query['points']	[$key]['status_id']);
-			$query['points']	[$key]['nombre'] = modules::run('applicant/getNombreApplicantById', $query['points']	[$key]['applicant_id']);
+			foreach($query['points'][$key]['requests'] as $k => $v)
+			{
+				$query['points'][$key]['requests'][$k]['type_request'] = modules::run('type_request/getNameByTypeRequestId', $query['points'][$key]['type_request_id']);
+				$query['points'][$key]['requests'][$k]['cedula'] = modules::run('applicant/getCedulaApplicantById', $query['points'][$key]['requests'][$k]['applicant_id']);
+				$query['points'][$key]['requests'][$k]['status'] =  modules::run('request/getStatusNameById',$query['points'][$key]['requests'][$k]['status_id']);
+				$query['points'][$key]['requests'][$k]['name'] = modules::run('applicant/getNombreApplicantById', $query['points'][$key]['requests'][$k]['applicant_id']);
+			}
 		}
 		return $query; 
 	}
@@ -262,14 +268,13 @@ class Diary extends MX_Controller{
 	{
 		if(modules::run('user/isAdministrator'))
 		{
-			$user_id = modules::run('user/getSessionId');
-			$data['userData'] = modules::run('user/getUserData', $user_id);
-			$data['title'] = 'Backend - Agenda';
 			$data['diary'] = $this->getDiaryActived();
 			//die_pre($data);
-			$data['contenido_principal'] = $this->load->view('ver-agenda', $data, true);
-			$this->load->view('back/template', $data);
+			$agenda = $this->load->view('agenda-pdf', $data, TRUE);
 
+			$mpdf = new mPDF();
+			$mpdf->WriteHTML($agenda);
+			$mpdf->Output('agenda.pdf','I');
 		}
 		else
 		{

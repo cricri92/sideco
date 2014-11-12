@@ -156,6 +156,19 @@ class Request_model extends CI_Model
 		$this->db->where('id', $request_id);
 		$this->db->update('request', $data);
 	}
+
+	//OBTENGO TODOS LOS TIPOS DE SOLICITUD
+	function getAllTypeRequests()
+	{
+		$query = $this->db->get('type_request');
+		return $query->result();
+	}
+
+	function getAllRequestsByTypeRequestId($type_request_id)
+	{
+		$query = $this->db->get_where('request', array('type_request_id'=>$type_request_id, 'status_id'=>6));
+		return $query->result();
+	}
 	
 }  
 
