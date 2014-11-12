@@ -331,7 +331,6 @@ class Request extends MX_Controller{
 				$data['title'] = 'Backend - Solicitud';
 				$data['status'] = $this->getStatus();
 				$data['request'] = $this->getRequest($request_id);
-				die_pre($data);
 				$data['contenido_principal'] = $this->load->view('ver-solicitud', $data, true);
 				$this->load->view('back/template', $data);
 			}
@@ -467,6 +466,7 @@ class Request extends MX_Controller{
 			$data['dependences'] = modules::run('dependence/getAllDependences');
 			$data['typeRequest'] = modules::run('type_request/getAllTypeRequests');
 			$data['request'] = $this->getRequestById($request_id);
+			$data['status'] = $this->getStatus();
 			$data['attachments'] = $this->getAttachmentByRequestId($request_id);
 			$data['contenido_principal'] = $this->load->view('actualizar-solicitud', $data, true);
 			$this->load->view('back/template', $data);
@@ -506,6 +506,11 @@ class Request extends MX_Controller{
 					'applicant_id'		=> $user_id,
 					'description'		=> $this->input->post('description')
 				);
+
+				if(!empty($this->input->post('resolution')))
+				{
+					$data['resolution'] = $this->input->post('resolution');
+				}
 
 				$request_id = $this->input->post('request_id');
 

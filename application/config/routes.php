@@ -114,6 +114,10 @@ $route['backend/consejeros/crear-tipo-consejero']			= 'counselor_type/createCoun
 $route['backend/consejeros/actualizar-consejero/(.*)']		= 'counselor/updateCounselor/$1';
 $route['backend/consejeros/actualizar-consejero']			= 'counselor/counselorUpdate';
 
+//ACTA
+$route['backend/actas/generar-acta']						= 'act/generateAct';
+$route['backend/actas/crear-acta']							= 'act/createAct';
+$route['backend/actas/ver-acta-actual']						= 'act/showAct';	
 
 //<---------------------------- /BACKEND ROUTES ---------------------->
 

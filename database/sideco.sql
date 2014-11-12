@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 11-11-2014 a las 18:25:53
+-- Tiempo de generación: 12-11-2014 a las 17:35:16
 -- Versión del servidor: 5.6.20
 -- Versión de PHP: 5.5.15
 
@@ -19,6 +19,28 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sideco`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `act`
+--
+
+CREATE TABLE IF NOT EXISTS `act` (
+`id` int(11) NOT NULL,
+  `time` time NOT NULL,
+  `diary_id` int(11) NOT NULL,
+  `activated` int(11) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- Volcado de datos para la tabla `act`
+--
+
+INSERT INTO `act` (`id`, `time`, `diary_id`, `activated`, `create_at`, `update_at`) VALUES
+(8, '04:56:00', 8, 1, '2014-11-12 15:40:01', '2014-11-12 16:13:47');
 
 -- --------------------------------------------------------
 
@@ -58,20 +80,23 @@ INSERT INTO `applicant` (`id`, `name`, `cedula`, `email`, `password`, `slug`, `c
 
 CREATE TABLE IF NOT EXISTS `counselor` (
 `id` int(11) NOT NULL,
+  `act_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
   `counselor_type_id` int(11) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
 -- Volcado de datos para la tabla `counselor`
 --
 
-INSERT INTO `counselor` (`id`, `name`, `lastname`, `counselor_type_id`, `create_at`, `update_at`) VALUES
-(1, 'Amadis', 'Martinez', 4, '2014-11-08 11:14:24', '2014-11-08 11:14:24'),
-(2, 'Marylin', 'Giugni', 1, '2014-11-08 12:29:37', '2014-11-08 12:29:37');
+INSERT INTO `counselor` (`id`, `act_id`, `name`, `counselor_type_id`, `create_at`, `update_at`) VALUES
+(18, 8, 'Consejero 1', 1, '2014-11-12 15:40:01', '2014-11-12 15:40:01'),
+(19, 8, 'Consejero 2', 1, '2014-11-12 15:40:01', '2014-11-12 15:40:01'),
+(20, 8, 'Consejero 3', 1, '2014-11-12 15:40:02', '2014-11-12 15:40:02'),
+(21, 8, 'Consejero 4', 1, '2014-11-12 15:40:02', '2014-11-12 15:40:02'),
+(22, 8, 'Consejero 5', 1, '2014-11-12 15:40:02', '2014-11-12 15:40:02');
 
 -- --------------------------------------------------------
 
@@ -149,7 +174,7 @@ INSERT INTO `diary` (`id`, `diary_type_id`, `num_acta`, `date`, `consideration`,
 (5, 1, 'asdadsd', '2014-11-14', NULL, NULL, 0, '2014-11-11 08:31:36', '2014-11-11 08:39:47'),
 (6, 2, '48486', '2014-11-12', NULL, NULL, 0, '2014-11-11 08:39:23', '2014-11-11 08:40:23'),
 (7, 2, 'sadsadsad', '2014-11-11', NULL, NULL, 0, '2014-11-11 08:40:23', '2014-11-11 08:41:01'),
-(8, 1, 'sadsadasdsad232323', '2014-11-23', NULL, NULL, 1, '2014-11-11 08:41:01', '2014-11-11 09:40:36');
+(8, 1, 'sadsadasdsad232323', '2014-11-23', '<p>Nueva consideracion</p>\n', '<p>NUevo comentario</p>\n', 1, '2014-11-11 08:41:01', '2014-11-12 15:37:57');
 
 -- --------------------------------------------------------
 
@@ -176,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `diary_points` (
   `request_id` int(11) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Volcado de datos para la tabla `diary_points`
@@ -184,7 +209,16 @@ CREATE TABLE IF NOT EXISTS `diary_points` (
 
 INSERT INTO `diary_points` (`id`, `diary_id`, `request_id`, `create_at`, `update_at`) VALUES
 (1, 8, 48, '2014-11-11 14:31:23', '2014-11-11 14:31:23'),
-(2, 8, 50, '2014-11-11 15:52:27', '2014-11-11 15:52:27');
+(2, 8, 50, '2014-11-11 15:52:27', '2014-11-11 15:52:27'),
+(3, 8, 50, '2014-11-12 05:59:12', '2014-11-12 05:59:12'),
+(4, 8, 51, '2014-11-12 05:59:20', '2014-11-12 05:59:20'),
+(5, 8, 52, '2014-11-12 08:17:15', '2014-11-12 08:17:15'),
+(6, 8, 49, '2014-11-12 08:17:22', '2014-11-12 08:17:22'),
+(7, 8, 51, '2014-11-12 15:06:06', '2014-11-12 15:06:06'),
+(8, 8, 53, '2014-11-12 15:54:31', '2014-11-12 15:54:31'),
+(9, 8, 50, '2014-11-12 16:16:01', '2014-11-12 16:16:01'),
+(10, 8, 52, '2014-11-12 16:20:07', '2014-11-12 16:20:07'),
+(11, 8, 51, '2014-11-12 16:20:49', '2014-11-12 16:20:49');
 
 -- --------------------------------------------------------
 
@@ -246,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `request` (
   `resolution` varchar(255) DEFAULT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
 
 --
 -- Volcado de datos para la tabla `request`
@@ -254,8 +288,11 @@ CREATE TABLE IF NOT EXISTS `request` (
 
 INSERT INTO `request` (`id`, `type_request_id`, `type_applicant_id`, `dependence_id`, `date`, `status_id`, `applicant_id`, `description`, `resolution`, `create_at`, `update_at`) VALUES
 (48, 5, 3, 1, '2014-11-11', 6, 12, 'Esta es una solicitud de Pasantias 2', NULL, '2014-11-11 04:27:10', '2014-11-11 06:38:06'),
-(49, 5, 2, 2, '2014-11-11', 5, 13, '<p>Hola, soy una descripcion</p>\n', NULL, '2014-11-11 06:52:37', '2014-11-11 06:52:37'),
-(50, 6, 1, 1, '2014-11-11', 6, 13, '<p>Comunicado Nro. DC-103-2012, de fecha 26/01/2012, recibida en esta Secretaria el 27/01/2012, emitido por el&nbsp;<strong>Prof. Amad&iacute;s Martinez - Director (E), informando que esta direccion le otorgo un permiso a la Prof. Ana Aguilera, por razones personales.</strong></p>\n', NULL, '2014-11-11 15:51:56', '2014-11-11 15:52:28');
+(49, 5, 2, 2, '2014-11-11', 6, 13, '<p>Hola, soy una descripcion</p>\n', NULL, '2014-11-11 06:52:37', '2014-11-12 08:17:22'),
+(50, 6, 1, 1, '2014-11-11', 6, 13, '<p>Comunicado Nro. DC-103-2012, de fecha 26/01/2012, recibida en esta Secretaria el 27/01/2012, emitido por el&nbsp;<strong>Prof. Amad&iacute;s Martinez - Director (E), informando que esta direccion le otorgo un permiso a la Prof. Ana Aguilera, por razones personales.</strong></p>\n', NULL, '2014-11-11 15:51:56', '2014-11-11 15:52:28'),
+(51, 5, 2, 1, '2014-11-12', 1, 13, '<p>asfdadasdsadsadsadasdsadsadsad asdas dsadsad</p>\n', '<p>Se acepto</p>\n', '2014-11-12 05:58:41', '2014-11-12 16:21:08'),
+(52, 6, 3, 2, '2014-11-12', 6, 13, '<p>sadsadsadsadsadsadas</p>\n', NULL, '2014-11-12 08:16:59', '2014-11-12 08:17:15'),
+(53, 5, 1, 2, '2014-11-12', 2, 13, '<p>Retiro de asinatura</p>\n', '<p>Se le nego.</p>\n', '2014-11-12 15:53:56', '2014-11-12 15:55:44');
 
 -- --------------------------------------------------------
 
@@ -419,6 +456,12 @@ INSERT INTO `userback` (`id`, `username`, `name`, `email`, `password`, `privileg
 --
 
 --
+-- Indices de la tabla `act`
+--
+ALTER TABLE `act`
+ ADD PRIMARY KEY (`id`), ADD KEY `diary_id` (`diary_id`);
+
+--
 -- Indices de la tabla `applicant`
 --
 ALTER TABLE `applicant`
@@ -428,7 +471,7 @@ ALTER TABLE `applicant`
 -- Indices de la tabla `counselor`
 --
 ALTER TABLE `counselor`
- ADD PRIMARY KEY (`id`), ADD KEY `id` (`counselor_type_id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `id` (`counselor_type_id`), ADD KEY `act_id` (`act_id`);
 
 --
 -- Indices de la tabla `counselor_type`
@@ -525,6 +568,11 @@ ALTER TABLE `userback`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `act`
+--
+ALTER TABLE `act`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
 -- AUTO_INCREMENT de la tabla `applicant`
 --
 ALTER TABLE `applicant`
@@ -533,7 +581,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 -- AUTO_INCREMENT de la tabla `counselor`
 --
 ALTER TABLE `counselor`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `counselor_type`
 --
@@ -558,7 +606,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `diary_points`
 --
 ALTER TABLE `diary_points`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `diary_type`
 --
@@ -573,7 +621,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT de la tabla `request`
 --
 ALTER TABLE `request`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=51;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT de la tabla `request_attachment`
 --
@@ -614,10 +662,17 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 
 --
+-- Filtros para la tabla `act`
+--
+ALTER TABLE `act`
+ADD CONSTRAINT `act_ibfk_1` FOREIGN KEY (`diary_id`) REFERENCES `diary` (`id`) ON DELETE CASCADE;
+
+--
 -- Filtros para la tabla `counselor`
 --
 ALTER TABLE `counselor`
-ADD CONSTRAINT `counselor_ibfk_1` FOREIGN KEY (`counselor_type_id`) REFERENCES `counselor_type` (`id`) ON DELETE CASCADE;
+ADD CONSTRAINT `counselor_ibfk_1` FOREIGN KEY (`counselor_type_id`) REFERENCES `counselor_type` (`id`) ON DELETE CASCADE,
+ADD CONSTRAINT `counselor_ibfk_2` FOREIGN KEY (`act_id`) REFERENCES `act` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `diary`

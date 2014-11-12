@@ -30,14 +30,12 @@
 				<div class="consideracion">
 					<center>
 						<div>
-							<?php echo $diary['consideration']; ?>
-							<p class="resolucion"><strong>Consideración:</strong> <?php echo $diary['consideration']; ?> </p>
+							<p class="resolucion"><strong>Consideración:</strong></p>
 							<p class="resolucion">- </p>
 						</div>
 					
 						<div>
-							<p class="resolucion"><strong>Comentario:</strong> <?php echo $diary['consideration']; ?> </p>
-							<?php echo $diary['comment']; ?>
+							<p class="resolucion"><strong>Comentario:</strong> </p>
 							<p class="resolucion">- </p>
 						</div>
 					</center>

@@ -75,8 +75,8 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black">Actas<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="acta.html">Generar Acta</a></li>
-                                    <li><a href="acta.html">Ver Acta Actual</a></li>
+                                    <li><a href="backend/actas/generar-acta">Generar Acta</a></li>
+                                    <li><a href="backend/actas/ver-acta-actual">Ver Acta Actual</a></li>
                                     <li><a href="acta.html">Ver Actas Publicadas</a></li>
                                 </ul>
                             </li>

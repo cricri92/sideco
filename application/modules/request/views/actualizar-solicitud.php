@@ -33,7 +33,7 @@
 				    			<?php endif; ?>
 				    		<?php endforeach; ?>
 				    	</select>
-			    			<?php echo form_error('dependence_id'); ?>
+			    		<?php echo form_error('dependence_id'); ?>
 			  		</div>
 					<input type="hidden" name="status_id" value="5">
 					<div class="form-group">
@@ -75,6 +75,34 @@
 				    	<?php endif; ?>
 				    	<?php echo form_error('description'); ?>
 				  	</div>
+				  	<?php if($request['status_id'] == 6): ?>
+				  		<div class="form-group" >
+					    	<label for="exampleInputPassword1">Estatus</label>
+					    	<select class="form-control" name="status_id">
+					    		<option value="">Seleccione</option>
+					    		<?php foreach($status as $key => $value):  ?>
+					    			<?php if($value['id'] == $request['status_id']): ?>
+					    				<option value="<?php echo $value['id']; ?>" selected> <?php echo $value['name']; ?> </option>
+					    			<?php else: ?>
+										<option value="<?php echo $value['id']; ?>"> <?php echo $value['name']; ?> </option>
+					    			<?php endif; ?>
+					    		<?php endforeach; ?>
+					    	</select>
+				    		<?php echo form_error('status_id'); ?>
+			    		</div>
+			    		<div class="form-group">
+					    	<label for="exampleInputEmail1">Resolucion</label>
+					    	<br>
+					    	<?php if(!empty(set_value('resolution'))): ?>
+					    		<textarea class="ckeditor" name="resolution"><?php echo set_value('resolution'); ?></textarea>
+					    	<?php else: ?>
+					    		<textarea class="ckeditor" name="resolution"><?php echo $request['resolution']; ?></textarea>
+					    	<?php endif; ?>
+					    	<?php echo form_error('resolution'); ?>
+					  	</div>
+			    	<?php else: ?>
+			    		<input type="hidden" name="status_id" value="5">
+				  	<?php endif; ?>
 				  	<div class="form-group">
 	                    <label class="">Adjuntos</label>
 	                    <input id="adjuntos" type="file" class="form-control" name="attachment[]" value="<?php echo set_value('attachment'); ?>" multiple/>

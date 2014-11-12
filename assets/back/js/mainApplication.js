@@ -1,5 +1,5 @@
 $(function () {
-
+    var i = 6;
     //CUANDO HAY UN CAMBIO EN EL SELECT
     $('#status_id').change(function(){
         var id = $('#status_id').val();
@@ -63,6 +63,25 @@ $(function () {
                 $('#nombre').fadeIn().val(data.name);
             }
         });
+    });
+
+    $('#agregarConsejero').click(function(){
+        $('#consejeros').append(
+            '<div class="consejero">'+
+                '<label for="exampleInputEmail1">Consejero Nº '+ i +'</label>'+
+                '<input type="text" class="form-control" name="consejeros[]" placeholder="">'+
+                '<label for="exampleInputEmail1">Tipo consejero Nº '+ i +'</label>'+
+                '<select class="form-control" name="counselor_type_id[]">'+
+                    '<option value="1">Representante de los profesores</option>'+
+                    '<option value="2">Representante de los estudiantes</option>'+
+                    '<option value="3">Representante suplente de los PROFESORES</option>'+
+                    '<option value="4">Director (E)-PRESIDENTE</option>'+
+                    '<option value="5">Representante suplente de los estudiantes</option>'+
+                '</select>'+
+            '</div>'
+        );
+        ++i;
+        return false;
     });
 /*
     $("#date_picker").click(function(){

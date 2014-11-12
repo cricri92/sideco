@@ -166,7 +166,7 @@ class Request_model extends CI_Model
 
 	function getAllRequestsByTypeRequestId($type_request_id)
 	{
-		$query = $this->db->get_where('request', array('type_request_id'=>$type_request_id, 'status_id'=>6));
+		$query = $this->db->get_where('request', array('type_request_id'=>$type_request_id, 'status_id !='=> 5));
 		return $query->result();
 	}
 	

@@ -100,6 +100,26 @@ class Diary extends MX_Controller{
 		return $this->diary_model->existDiaryById($diary_id);
 	}
 
+	public function getDiaryActive()
+	{
+		$query = $this->diary_model->getDiaryActive();
+		$query = SQL_to_array($query);
+		$query['diary_type'] = $this->diary_model->getNameDiaryTypeById($query['diary_type_id']);
+		$query['type_requests'] = modules::run('request/getRequestByTypeRequest');  
+		$query['points'] = modules::run('request/getRequestByTypeRequest');
+		foreach ($query['points'] as $key => $value) 
+		{
+			foreach($query['points'][$key]['requests'] as $k => $v)
+			{
+				$query['points'][$key]['requests'][$k]['type_request'] = modules::run('type_request/getNameByTypeRequestId', $query['points'][$key]['type_request_id']);
+				$query['points'][$key]['requests'][$k]['cedula'] = modules::run('applicant/getCedulaApplicantById', $query['points'][$key]['requests'][$k]['applicant_id']);
+				$query['points'][$key]['requests'][$k]['status'] =  modules::run('request/getStatusNameById',$query['points'][$key]['requests'][$k]['status_id']);
+				$query['points'][$key]['requests'][$k]['name'] = modules::run('applicant/getNombreApplicantById', $query['points'][$key]['requests'][$k]['applicant_id']);
+			}
+		}
+		return $query; 
+	}
+
 	public function getDiaryActived()
 	{
 		$query = $this->diary_model->getDiaryActive();
@@ -269,9 +289,7 @@ class Diary extends MX_Controller{
 		if(modules::run('user/isAdministrator'))
 		{
 			$data['diary'] = $this->getDiaryActived();
-			//die_pre($data);
 			$agenda = $this->load->view('agenda-pdf', $data, TRUE);
-
 			$mpdf = new mPDF();
 			$mpdf->WriteHTML($agenda);
 			$mpdf->Output('agenda.pdf','I');
@@ -285,7 +303,7 @@ class Diary extends MX_Controller{
 	function getDiaryDataById($diary_id)
 	{
 		$query = $this->diary_model->getDiaryDataById($diary_id);
-		$query = objectSQL_to_array($query);
+		$query = SQL_to_array($query);
 		return $query;
 	}
 
@@ -298,4 +316,12 @@ class Diary extends MX_Controller{
 	{
 		$this->diary_model->addRequestToDiary($diary_id, $request_id);
 	}
+
+	function getActualPointsByDiaryId($diary_id)
+	{
+		$query = $this->diary_model->getActualPointsByDiaryId($diary_id);
+		$query = objectSQL_to_array($query);
+		return $query;
+	}
+
 }

@@ -123,6 +123,14 @@ class Diary_model extends CI_Model
 		$query = $this->db->get_where('diary_type',array('id' => $diary_type_id));
 		return $query->row()->name;
 	}
+
+	function getActualPointsByDiaryId($diary_id)
+	{
+		$this->db->from('request');	
+		$this->db->join('diary_points', 'request.id = diary_points.request_id');
+		$query = $this->db->get();
+		return $query->result();
+	}
 }  
 
 ?>
