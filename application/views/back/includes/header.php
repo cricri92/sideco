@@ -84,7 +84,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black">Consejeros<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="backend/consejeros/nuevo-consejero">Crear consejero</a></li>
-                                    <li><a href="backend/consejeros/consejeros">Ver consejeros</a></li>
+                                    <li><a href="backend/consejeros/ver-consejeros">Ver consejeros</a></li>
                                     <li><a href="backend/consejeros/nuevo-tipo-consejero">Nuevo tipo de consejeros</a></li>
                                 </ul>
                             </li>

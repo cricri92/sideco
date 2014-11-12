@@ -4,6 +4,7 @@
 		<div class="panel panel-primary">
 	      	<div class="panel-heading">
 	        	<h3 class="panel-title">Agenda</h3>
+	        	<button class=href="backend/agendas/ver-agenda-pdf">Ver agenda en PDF</button>
 	      	</div>
 	      	<div class="panel-body">
 	        	<table align="center" width="100%" border="1" id="membrete">

@@ -24,8 +24,8 @@
 						        <td><?php echo $value['lastname']; ?></td>
 						        <td><?php echo $value['counselor_type_id']; ?></td>
 						 		<td><a href=""></a>Consejos</td>
-						        <!--<td><a href="backend/solicitantes/actualizar/<?php echo $value['slug']; ?>">Actualizar</a></td>
-						        <td><a href="backend/solicitantes/eliminar/<?php echo $value['slug']; ?>">Eliminar</a></td>-->
+						        <!--<td><a href="backend/consejeros/actualizar/<?php echo $value['slug']; ?>">Actualizar</a></td>
+						        <td><a href="backend/consejeros/eliminar/<?php echo $value['slug']; ?>">Eliminar</a></td>-->
 					        </tr>
 				       	<?php endforeach; ?>
 				     	</tbody>

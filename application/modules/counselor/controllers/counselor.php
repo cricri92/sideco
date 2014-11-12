@@ -33,7 +33,7 @@
 				$this->form_validation->set_rules('name','Nombre','required|trim');
 				$this->form_validation->set_rules('lastname','Apellido','required|trim');
 				$this->form_validation->set_rules('counselor_type_id','Rol','required');
-				
+
 				//DEFINIMOS LOS MENSAJES PARA LAS REGLAS
 				$this->form_validation->set_message('required','%s es requerido.');
 			
@@ -41,14 +41,14 @@
 				if($this->form_validation->run($this))
 				{
 					$data = array(
-						'name' => $this->input->post('name'),
-						'lastname' => $this->input->post('lastname'),
+						'name' 				=> $this->input->post('name'),
+						'lastname' 			=> $this->input->post('lastname'),
 						'counselor_type_id' => $this->input->post('counselor_type_id'),
-				);
+						'slug' 				=> modules::run('operations/createSlug', $this->input->post('name').' '.$this->input->post('lastname'))
+					);
 
 					$this->counselor_model->insertCounselor($data);
-
-					redirect('backend');
+					redirect('backend/consejeros/ver-consejeros');
 				}
 				else
 				{
@@ -99,10 +99,49 @@
 				$data['contenido_principal'] = $this->load->view('ver-consejeros', $data, true);
 				$this->load->view('back/template', $data);
 			}
+		}
+
+		public function updateCounselor($slug)
+		{
+			if(!empty($_POST))
+			{
+				$this->form_validation->set_rules('name', 'Nombre', 'required|trim');
+				$this->form_validation->set_rules('lastname', 'Apellido', 'required|trim');
+				$this->form_validation->set_rules('counselor_type_id', 'Tipo de solicitante','required');
+
+				$this->form_validation->set_message('required', '%s es requerido.');
+				
+				if($this->form_validation->run($this))
+				{
+					$data = array(
+						'name' 				=> $this->input->post('name'),
+						'lastname' 			=> $this->input->post('lastname'),
+						'counselor_type' 	=> $this->input->post('counselor_type'),
+						'slug'	 			=> modules::run('operations/createSlug', $this->input->post('name').' '.$this->input->post('lastname'))
+					);
+
+					$counselor_id = $this->input->post('counselor_id');
+
+					$this->counselor_model->updateCounselor($counselor_id, $data);
+
+					redirect('backend/consejeros/ver-consejeros');
+				}
+				else
+				{
+					$user_id = modules::run('user/getSessionId');
+					$data['userData'] = modules::run('user/getUserData', $user_id);
+					$data['title'] = 'Backend - Nuevo consejero';
+					$data['counselor_type'] = modules::run('counselor_type/getAllCounselorType');
+					die_pre($data);
+					$data['contenido_principal'] = $this->load->view('nuevo-consejero',$data, true);
+					$this->load->view('back/template', $data);
+				}
+			}
 			else
 			{
 				redirect('backend');
-			}
+			
+			}	
 		}
 	}
  ?>

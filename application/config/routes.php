@@ -84,7 +84,7 @@ $route['backend/solicitudes/eliminar/(.*)']					= 'request/deleteRequest/$1';
 $route['backend/solicitudes/eliminar-solicitud/(.*)']		= 'request/requestDelete/$1';			
 $route['backend/solicitudes/actualizar/(.*)']				= 'request/updateRequest/$1';
 $route['backend/solicitudes/actualizar-solicitud']			= 'request/requestUpdate';
-
+ 
 //AGENDA
 $route['backend/agendas/nueva-agenda']						= 'diary/newDiary';
 $route['backend/agendas/crear-agenda']						= 'diary/createDiary';
@@ -93,6 +93,8 @@ $route['backend/agendas/agregar-solicitud']					= 'diary/addRequest';
 $route['backend/agendas/actualizar']						= 'diary/updateDiary';
 $route['backend/agendas/actualizar-agenda']					= 'diary/diaryUpdate';
 $route['backend/agendas/ver-agenda']						= 'diary/showDiary';
+$route['backend/agendas/ver-agenda-pdf']					= 'pdf/newPDFDiary';
+
 
 //DEPENDENCIAS
 $route['backend/dependencias/nueva-dependencia']			= 'dependence/newDependence';
@@ -106,9 +108,11 @@ $route['backend/dependencias/eliminar/(.*)']				= 'dependence/dependenceDelete/$
 //CONSEJEROS
 $route['backend/consejeros/nuevo-consejero']				= 'counselor/newCounselor';
 $route['backend/consejeros/crear-consejero']				= 'counselor/createCounselor';
-$route['backend/consejeros/consejeros']						= 'counselor/showCounselors';
+$route['backend/consejeros/ver-consejeros']					= 'counselor/showCounselors';
 $route['backend/consejeros/nuevo-tipo-consejero']			= 'counselor_type/newCounselorType';
 $route['backend/consejeros/crear-tipo-consejero']			= 'counselor_type/createCounselorType';
+$route['backend/consejeros/actualizar-consejero/(.*)']		= 'counselor/updateCounselor/$1';
+$route['backend/consejeros/actualizar-consejero']			= 'counselor/counselorUpdate';
 
 
 //<---------------------------- /BACKEND ROUTES ---------------------->
