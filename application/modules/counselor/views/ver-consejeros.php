@@ -10,8 +10,7 @@
 				      	<thead>
 				        	<tr>
 					          	<th>Nombre</th>
-					          	<th>Apellido</th>
-					          	<th>Tipo</th>
+					           	<th>Tipo</th>
 					          	<th></th> <!--Ver consejos en los que ha estado el consejero-->
 					          	<th></th>
 					        	<th></th>
@@ -21,7 +20,6 @@
 				       	<?php foreach ($consejeros as $key => $value): ?>
 				       		 <tr>
 						        <td><?php echo $value['name']; ?></td>
-						        <td><?php echo $value['lastname']; ?></td>
 						        <td><?php echo $value['counselor_type_id']; ?></td>
 						 		<td><a href=""></a>Consejos</td>
 						        <!--<td><a href="backend/consejeros/actualizar/<?php echo $value['slug']; ?>">Actualizar</a></td>

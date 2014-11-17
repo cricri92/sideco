@@ -2,10 +2,10 @@
 -- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 12-11-2014 a las 17:35:16
--- Versión del servidor: 5.6.20
--- Versión de PHP: 5.5.15
+-- Host: localhost
+-- Generation Time: Nov 17, 2014 at 05:48 am
+-- Server version: 5.6.20
+-- PHP Version: 5.5.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `sideco`
+-- Database: `sideco`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `act`
+-- Table structure for table `act`
 --
 
 CREATE TABLE IF NOT EXISTS `act` (
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `act` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
--- Volcado de datos para la tabla `act`
+-- Dumping data for table `act`
 --
 
 INSERT INTO `act` (`id`, `time`, `diary_id`, `activated`, `create_at`, `update_at`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `act` (`id`, `time`, `diary_id`, `activated`, `create_at`, `update_a
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `applicant`
+-- Table structure for table `applicant`
 --
 
 CREATE TABLE IF NOT EXISTS `applicant` (
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `applicant` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
--- Volcado de datos para la tabla `applicant`
+-- Dumping data for table `applicant`
 --
 
 INSERT INTO `applicant` (`id`, `name`, `cedula`, `email`, `password`, `slug`, `create_at`, `update_at`) VALUES
@@ -68,14 +68,14 @@ INSERT INTO `applicant` (`id`, `name`, `cedula`, `email`, `password`, `slug`, `c
 (5, 'María Fátima de Abreu', '23456', 'mfdabreu@sideco.com', 'c24d0a1968e339c3786751ab16411c2c24ce8a2e', 'maria-fatima-de-abreu', '2014-11-08 14:18:50', '2014-11-08 14:18:50'),
 (8, 'Elsa Tovar', '45678', 'etovar@sideco.com', '3b4f3367054b005bf971f96026b4a55003189565', 'elsa-tovar', '2014-11-08 14:22:38', '2014-11-08 14:22:38'),
 (10, 'Amadis Martinez', '897456', 'amartinez@sideco.com', '', 'amadis-martinez', '2014-11-08 16:25:54', '2014-11-08 16:25:54'),
-(11, 'Salomon Ruiz', '123456789', 'sruiz@gmail.com', '786bd9a52ee9af08db5c139b86cc60533ca1c7b6', 'salomon-ruiz', '2014-11-11 01:05:01', '2014-11-11 01:05:01'),
-(12, 'Oriana Ruiz', '21032766', 'oruiz@sideco.com', '4b0b99aa78b19bf81811b104f22caa63bae621c0', 'oriana-ruiz', '2014-11-11 04:25:45', '2014-11-11 04:25:45'),
-(13, 'Hector Flores', '20162504', 'hecto932@gmail.com', '786bd9a52ee9af08db5c139b86cc60533ca1c7b6', 'hector-flores', '2014-11-11 06:52:16', '2014-11-11 06:52:16');
+(11, 'Mirella Herrera', '123456789', 'mherrera@sideco.com', 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', 'mirella-herrera', '2014-11-11 01:05:01', '2014-11-17 04:33:57'),
+(12, 'Desiree Delgado', '2103276', 'ddelgado@sideco.com', 'c414368fdd8cbc621a07f39a39662b3099f3758a', 'desiree-delgado', '2014-11-11 04:25:45', '2014-11-17 04:33:09'),
+(13, 'Johana Guerrero', '345677', 'jguerrero@sideco.com', '5c344bfa5a46e9591389bb3681caad3d92623084', 'johana-guerrero', '2014-11-11 06:52:16', '2014-11-17 04:32:05');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `counselor`
+-- Table structure for table `counselor`
 --
 
 CREATE TABLE IF NOT EXISTS `counselor` (
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `counselor` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
--- Volcado de datos para la tabla `counselor`
+-- Dumping data for table `counselor`
 --
 
 INSERT INTO `counselor` (`id`, `act_id`, `name`, `counselor_type_id`, `create_at`, `update_at`) VALUES
@@ -101,7 +101,7 @@ INSERT INTO `counselor` (`id`, `act_id`, `name`, `counselor_type_id`, `create_at
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `counselor_type`
+-- Table structure for table `counselor_type`
 --
 
 CREATE TABLE IF NOT EXISTS `counselor_type` (
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `counselor_type` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- Volcado de datos para la tabla `counselor_type`
+-- Dumping data for table `counselor_type`
 --
 
 INSERT INTO `counselor_type` (`id`, `name`, `create_at`, `update_at`) VALUES
@@ -125,7 +125,7 @@ INSERT INTO `counselor_type` (`id`, `name`, `create_at`, `update_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `dependence`
+-- Table structure for table `dependence`
 --
 
 CREATE TABLE IF NOT EXISTS `dependence` (
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `dependence` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Volcado de datos para la tabla `dependence`
+-- Dumping data for table `dependence`
 --
 
 INSERT INTO `dependence` (`id`, `name`, `subject_id`, `slug`, `create_at`, `update_at`) VALUES
@@ -149,7 +149,7 @@ INSERT INTO `dependence` (`id`, `name`, `subject_id`, `slug`, `create_at`, `upda
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `diary`
+-- Table structure for table `diary`
 --
 
 CREATE TABLE IF NOT EXISTS `diary` (
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `diary` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
--- Volcado de datos para la tabla `diary`
+-- Dumping data for table `diary`
 --
 
 INSERT INTO `diary` (`id`, `diary_type_id`, `num_acta`, `date`, `consideration`, `comment`, `activated`, `create_at`, `update_at`) VALUES
@@ -179,7 +179,7 @@ INSERT INTO `diary` (`id`, `diary_type_id`, `num_acta`, `date`, `consideration`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `diary_attachment`
+-- Table structure for table `diary_attachment`
 --
 
 CREATE TABLE IF NOT EXISTS `diary_attachment` (
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `diary_attachment` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `diary_points`
+-- Table structure for table `diary_points`
 --
 
 CREATE TABLE IF NOT EXISTS `diary_points` (
@@ -204,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `diary_points` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
--- Volcado de datos para la tabla `diary_points`
+-- Dumping data for table `diary_points`
 --
 
 INSERT INTO `diary_points` (`id`, `diary_id`, `request_id`, `create_at`, `update_at`) VALUES
@@ -223,7 +223,7 @@ INSERT INTO `diary_points` (`id`, `diary_id`, `request_id`, `create_at`, `update
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `diary_type`
+-- Table structure for table `diary_type`
 --
 
 CREATE TABLE IF NOT EXISTS `diary_type` (
@@ -234,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `diary_type` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `diary_type`
+-- Dumping data for table `diary_type`
 --
 
 INSERT INTO `diary_type` (`id`, `name`, `create_at`, `update_a`) VALUES
@@ -244,7 +244,7 @@ INSERT INTO `diary_type` (`id`, `name`, `create_at`, `update_a`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `privilege`
+-- Table structure for table `privilege`
 --
 
 CREATE TABLE IF NOT EXISTS `privilege` (
@@ -255,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `privilege` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `privilege`
+-- Dumping data for table `privilege`
 --
 
 INSERT INTO `privilege` (`id`, `name`, `create_at`, `update_at`) VALUES
@@ -265,7 +265,7 @@ INSERT INTO `privilege` (`id`, `name`, `create_at`, `update_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `request`
+-- Table structure for table `request`
 --
 
 CREATE TABLE IF NOT EXISTS `request` (
@@ -283,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `request` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
 
 --
--- Volcado de datos para la tabla `request`
+-- Dumping data for table `request`
 --
 
 INSERT INTO `request` (`id`, `type_request_id`, `type_applicant_id`, `dependence_id`, `date`, `status_id`, `applicant_id`, `description`, `resolution`, `create_at`, `update_at`) VALUES
@@ -297,7 +297,7 @@ INSERT INTO `request` (`id`, `type_request_id`, `type_applicant_id`, `dependence
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `request_attachment`
+-- Table structure for table `request_attachment`
 --
 
 CREATE TABLE IF NOT EXISTS `request_attachment` (
@@ -310,7 +310,7 @@ CREATE TABLE IF NOT EXISTS `request_attachment` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `request_attachment`
+-- Dumping data for table `request_attachment`
 --
 
 INSERT INTO `request_attachment` (`id`, `request_id`, `name`, `type`, `create_at`, `update_at`) VALUES
@@ -319,7 +319,7 @@ INSERT INTO `request_attachment` (`id`, `request_id`, `name`, `type`, `create_at
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `semester`
+-- Table structure for table `semester`
 --
 
 CREATE TABLE IF NOT EXISTS `semester` (
@@ -330,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `semester` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `semester`
+-- Dumping data for table `semester`
 --
 
 INSERT INTO `semester` (`id`, `name`, `create_at`, `update_at`) VALUES
@@ -340,7 +340,7 @@ INSERT INTO `semester` (`id`, `name`, `create_at`, `update_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `status`
+-- Table structure for table `status`
 --
 
 CREATE TABLE IF NOT EXISTS `status` (
@@ -351,7 +351,7 @@ CREATE TABLE IF NOT EXISTS `status` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- Volcado de datos para la tabla `status`
+-- Dumping data for table `status`
 --
 
 INSERT INTO `status` (`id`, `name`, `create_at`, `update_at`) VALUES
@@ -365,7 +365,7 @@ INSERT INTO `status` (`id`, `name`, `create_at`, `update_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `subject_schedule_point`
+-- Table structure for table `subject_schedule_point`
 --
 
 CREATE TABLE IF NOT EXISTS `subject_schedule_point` (
@@ -378,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `subject_schedule_point` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `type_applicant`
+-- Table structure for table `type_applicant`
 --
 
 CREATE TABLE IF NOT EXISTS `type_applicant` (
@@ -389,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `type_applicant` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Volcado de datos para la tabla `type_applicant`
+-- Dumping data for table `type_applicant`
 --
 
 INSERT INTO `type_applicant` (`id`, `name`, `create_at`, `update_at`) VALUES
@@ -400,7 +400,7 @@ INSERT INTO `type_applicant` (`id`, `name`, `create_at`, `update_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `type_request`
+-- Table structure for table `type_request`
 --
 
 CREATE TABLE IF NOT EXISTS `type_request` (
@@ -412,7 +412,7 @@ CREATE TABLE IF NOT EXISTS `type_request` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- Volcado de datos para la tabla `type_request`
+-- Dumping data for table `type_request`
 --
 
 INSERT INTO `type_request` (`id`, `name`, `slug`, `create_at`, `update_at`) VALUES
@@ -422,7 +422,7 @@ INSERT INTO `type_request` (`id`, `name`, `slug`, `create_at`, `update_at`) VALU
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `userback`
+-- Table structure for table `userback`
 --
 
 CREATE TABLE IF NOT EXISTS `userback` (
@@ -438,263 +438,260 @@ CREATE TABLE IF NOT EXISTS `userback` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
--- Volcado de datos para la tabla `userback`
+-- Dumping data for table `userback`
 --
 
 INSERT INTO `userback` (`id`, `username`, `name`, `email`, `password`, `privilege_id`, `slug`, `create_at`, `update_at`) VALUES
 (1, 'admin', 'Administrador', 'admin@admin.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'administrador', '2014-11-02 03:34:29', '2014-11-03 01:17:49'),
 (2, 'cricri92', 'Oriana Ruiz', 'oriru92@gmail.com', '994519b667315632474c34d145622bc4d0ea7aab', 1, 'oriana-ruiz', '2014-11-02 06:13:36', '2014-11-03 01:17:54'),
-(3, 'hflores4', 'Hector Flores', 'hecto932@gmail.com', '786bd9a52ee9af08db5c139b86cc60533ca1c7b6', 1, 'hector-flores', '2014-11-02 06:25:24', '2014-11-06 16:35:14'),
 (5, 'usuario1', 'Usuario1', 'usuario1@gmail.com', 'ada6d34bca926b40be00893cabc0aeae138ea2a0', 2, 'usuario1', '2014-11-02 17:38:07', '2014-11-03 01:18:02'),
 (6, 'dhrosquete', 'Daniel Rosquete', 'dhrosquete@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 2, 'daniel-rosquete', '2014-11-02 18:28:24', '2014-11-03 01:18:04'),
-(8, 'fruiz', 'Flavio Ruiz', 'fruiz@gorditocuchi.com', 'e60aaa4e7dd43e19eecaa8af7691c1bacd724e23', 2, 'flavio-ruiz', '2014-11-03 03:08:19', '2014-11-03 03:08:19'),
-(9, 'm0ises2', 'Moises Alvarado', 'moisesalvarado84@gmail.com', '41fd6e5db8918e117fc38ed0c1a8bbac1b34f096', 2, 'moises-alvarado', '2014-11-05 23:31:47', '2014-11-05 23:31:47'),
 (10, 'aguerra', 'Anibal Guerra', 'aguerra@gmail.com', '705dbe71b3aa50ebbbcf84ba4d3b81e4dbac870a', 2, 'anibal-guerra', '2014-11-06 06:36:35', '2014-11-06 06:36:35');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `act`
+-- Indexes for table `act`
 --
 ALTER TABLE `act`
  ADD PRIMARY KEY (`id`), ADD KEY `diary_id` (`diary_id`);
 
 --
--- Indices de la tabla `applicant`
+-- Indexes for table `applicant`
 --
 ALTER TABLE `applicant`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `counselor`
+-- Indexes for table `counselor`
 --
 ALTER TABLE `counselor`
  ADD PRIMARY KEY (`id`), ADD KEY `id` (`counselor_type_id`), ADD KEY `act_id` (`act_id`);
 
 --
--- Indices de la tabla `counselor_type`
+-- Indexes for table `counselor_type`
 --
 ALTER TABLE `counselor_type`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `dependence`
+-- Indexes for table `dependence`
 --
 ALTER TABLE `dependence`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `diary`
+-- Indexes for table `diary`
 --
 ALTER TABLE `diary`
  ADD PRIMARY KEY (`id`), ADD KEY `diary_type_id` (`diary_type_id`);
 
 --
--- Indices de la tabla `diary_attachment`
+-- Indexes for table `diary_attachment`
 --
 ALTER TABLE `diary_attachment`
  ADD PRIMARY KEY (`id`), ADD KEY `request_id` (`request_id`);
 
 --
--- Indices de la tabla `diary_points`
+-- Indexes for table `diary_points`
 --
 ALTER TABLE `diary_points`
  ADD PRIMARY KEY (`id`), ADD KEY `diary_id` (`diary_id`), ADD KEY `request_id` (`request_id`);
 
 --
--- Indices de la tabla `diary_type`
+-- Indexes for table `diary_type`
 --
 ALTER TABLE `diary_type`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `privilege`
+-- Indexes for table `privilege`
 --
 ALTER TABLE `privilege`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `request`
+-- Indexes for table `request`
 --
 ALTER TABLE `request`
  ADD PRIMARY KEY (`id`), ADD KEY `type_request_id` (`type_request_id`), ADD KEY `status_id` (`status_id`), ADD KEY `user_id` (`applicant_id`), ADD KEY `type_applicant_id` (`type_applicant_id`), ADD KEY `dependence_id` (`dependence_id`);
 
 --
--- Indices de la tabla `request_attachment`
+-- Indexes for table `request_attachment`
 --
 ALTER TABLE `request_attachment`
  ADD PRIMARY KEY (`id`), ADD KEY `request_id` (`request_id`);
 
 --
--- Indices de la tabla `semester`
+-- Indexes for table `semester`
 --
 ALTER TABLE `semester`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `status`
+-- Indexes for table `status`
 --
 ALTER TABLE `status`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `subject_schedule_point`
+-- Indexes for table `subject_schedule_point`
 --
 ALTER TABLE `subject_schedule_point`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `type_applicant`
+-- Indexes for table `type_applicant`
 --
 ALTER TABLE `type_applicant`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `type_request`
+-- Indexes for table `type_request`
 --
 ALTER TABLE `type_request`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `userback`
+-- Indexes for table `userback`
 --
 ALTER TABLE `userback`
  ADD PRIMARY KEY (`id`), ADD KEY `privilege_id` (`privilege_id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `act`
+-- AUTO_INCREMENT for table `act`
 --
 ALTER TABLE `act`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT de la tabla `applicant`
+-- AUTO_INCREMENT for table `applicant`
 --
 ALTER TABLE `applicant`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
--- AUTO_INCREMENT de la tabla `counselor`
+-- AUTO_INCREMENT for table `counselor`
 --
 ALTER TABLE `counselor`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
--- AUTO_INCREMENT de la tabla `counselor_type`
+-- AUTO_INCREMENT for table `counselor_type`
 --
 ALTER TABLE `counselor_type`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT de la tabla `dependence`
+-- AUTO_INCREMENT for table `dependence`
 --
 ALTER TABLE `dependence`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT de la tabla `diary`
+-- AUTO_INCREMENT for table `diary`
 --
 ALTER TABLE `diary`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT de la tabla `diary_attachment`
+-- AUTO_INCREMENT for table `diary_attachment`
 --
 ALTER TABLE `diary_attachment`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `diary_points`
+-- AUTO_INCREMENT for table `diary_points`
 --
 ALTER TABLE `diary_points`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
--- AUTO_INCREMENT de la tabla `diary_type`
+-- AUTO_INCREMENT for table `diary_type`
 --
 ALTER TABLE `diary_type`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT de la tabla `privilege`
+-- AUTO_INCREMENT for table `privilege`
 --
 ALTER TABLE `privilege`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT de la tabla `request`
+-- AUTO_INCREMENT for table `request`
 --
 ALTER TABLE `request`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=54;
 --
--- AUTO_INCREMENT de la tabla `request_attachment`
+-- AUTO_INCREMENT for table `request_attachment`
 --
 ALTER TABLE `request_attachment`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT de la tabla `semester`
+-- AUTO_INCREMENT for table `semester`
 --
 ALTER TABLE `semester`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT de la tabla `status`
+-- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT de la tabla `subject_schedule_point`
+-- AUTO_INCREMENT for table `subject_schedule_point`
 --
 ALTER TABLE `subject_schedule_point`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `type_applicant`
+-- AUTO_INCREMENT for table `type_applicant`
 --
 ALTER TABLE `type_applicant`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT de la tabla `type_request`
+-- AUTO_INCREMENT for table `type_request`
 --
 ALTER TABLE `type_request`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT de la tabla `userback`
+-- AUTO_INCREMENT for table `userback`
 --
 ALTER TABLE `userback`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `act`
+-- Constraints for table `act`
 --
 ALTER TABLE `act`
 ADD CONSTRAINT `act_ibfk_1` FOREIGN KEY (`diary_id`) REFERENCES `diary` (`id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `counselor`
+-- Constraints for table `counselor`
 --
 ALTER TABLE `counselor`
 ADD CONSTRAINT `counselor_ibfk_1` FOREIGN KEY (`counselor_type_id`) REFERENCES `counselor_type` (`id`) ON DELETE CASCADE,
 ADD CONSTRAINT `counselor_ibfk_2` FOREIGN KEY (`act_id`) REFERENCES `act` (`id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `diary`
+-- Constraints for table `diary`
 --
 ALTER TABLE `diary`
 ADD CONSTRAINT `diary_ibfk_1` FOREIGN KEY (`diary_type_id`) REFERENCES `diary_type` (`id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `diary_attachment`
+-- Constraints for table `diary_attachment`
 --
 ALTER TABLE `diary_attachment`
 ADD CONSTRAINT `diary_attachment_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `diary_points`
+-- Constraints for table `diary_points`
 --
 ALTER TABLE `diary_points`
 ADD CONSTRAINT `diary_points_ibfk_1` FOREIGN KEY (`diary_id`) REFERENCES `diary` (`id`) ON DELETE CASCADE,
 ADD CONSTRAINT `diary_points_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `request`
+-- Constraints for table `request`
 --
 ALTER TABLE `request`
 ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`type_request_id`) REFERENCES `type_request` (`id`) ON DELETE CASCADE,
@@ -704,13 +701,13 @@ ADD CONSTRAINT `request_ibfk_4` FOREIGN KEY (`type_applicant_id`) REFERENCES `ty
 ADD CONSTRAINT `request_ibfk_5` FOREIGN KEY (`dependence_id`) REFERENCES `dependence` (`id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `request_attachment`
+-- Constraints for table `request_attachment`
 --
 ALTER TABLE `request_attachment`
 ADD CONSTRAINT `request_attachment_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `userback`
+-- Constraints for table `userback`
 --
 ALTER TABLE `userback`
 ADD CONSTRAINT `userback_ibfk_1` FOREIGN KEY (`privilege_id`) REFERENCES `privilege` (`id`) ON DELETE CASCADE;

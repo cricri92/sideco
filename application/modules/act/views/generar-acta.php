@@ -81,7 +81,7 @@
 					    	</select>
 					  	</div>
 				  	</div>
-				  	<a id="agregarConsejero">Agregar consejero</a>
+				  	<a id="agregarConsejero">Agregar otro consejero</a>
 				</div>
 			</div>
 			<center><div><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-send"></span> Generar acta</button></div></center>

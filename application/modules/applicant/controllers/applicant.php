@@ -124,7 +124,7 @@ class Applicant extends MX_Controller
 			$data['userData'] = modules::run('user/getUserData', $user_id);
 			$data['title'] = 'Backend - Actualizar solicitante';
 			$data['applicant'] = $this->getApplicantBySlug($slug);
-			die_pre($data);
+			//die_pre($data);
 			$data['contenido_principal'] = $this->load->view('actualizar-solicitante',$data, true);
 			$this->load->view('back/template', $data);
 		}
@@ -226,7 +226,7 @@ class Applicant extends MX_Controller
 				$data['typeApplicant'] = $this->getApplicantType();
 				$data['dependences'] = modules::run('dependence/getAllDependences');
 				$data['applicant'] = $this->getApplicantbyId($this->input->post('applicant_id'));
-				die_pre($data);
+				//die_pre($data);
 				$data['contenido_principal'] = $this->load->view('actualizar-solicitante',$data, true);
 				$this->load->view('back/template', $data);
 			}
